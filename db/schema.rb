@@ -11,16 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213191811) do
+ActiveRecord::Schema.define(version: 0) do
 
-  create_table "credit_cards", force: :cascade do |t|
-    t.string   "company",                      null: false
-    t.string   "card_name",                    null: false
-    t.boolean  "user_created", default: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  add_index "credit_cards", ["card_name"], name: "index_credit_cards_on_card_name", unique: true
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
 end
