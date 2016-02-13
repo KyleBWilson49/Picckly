@@ -11,9 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160213231432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "emotions", force: :cascade do |t|
+    t.float    "anger",      null: false
+    t.float    "contempt",   null: false
+    t.float    "disgust",    null: false
+    t.float    "fear",       null: false
+    t.float    "happiness",  null: false
+    t.float    "neutral",    null: false
+    t.float    "sadness",    null: false
+    t.float    "surprise",   null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "emotions", ["user_id"], name: "index_emotions_on_user_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username",      null: false
+    t.string   "session_token", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
