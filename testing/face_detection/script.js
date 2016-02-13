@@ -63,23 +63,55 @@ window.onload = function() {
         canvas.getContext('2d').drawImage(vid, 0, 0);
         var data = canvas.toDataURL('image/jpg');
         var blobData = dataURItoBlob(data);
+        // EMOTION BELOW
         $.ajax({
-          url: 'https://api.projectoxford.ai/face/v0/detections?subscription-key=f79747ed06a7400f8e1053a00639d44a',
-          type: 'POST',
-          contentType: 'application/octet-stream',
-          processData: false,
-          data: blobData,
-          success: function (data) {
-            // debugger;
-            var html = '';
-
-            $.each(data, function (commentIndex, object) {
-              debugger;
-              html += 'faceid:' + object['faceId']+"\r\n";
-            });
-            alert(html);
-          }
+            url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
+            beforeSend: function(xhrObj){
+                // Request headers
+                xhrObj.setRequestHeader("Content-Type","application/octet-stream");
+                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","6f76ecd049fc42ffb6bf91d26e37a9aa");
+            },
+            type: "POST",
+            // Request body
+            processData: false,
+            data: blobData,
         })
+        .done(function(data) {
+            console.log(data[0].scores.anger)
+        })
+        .fail(function() {
+            alert("error");
+        });
+
+        // DETECTION BELOW
+        // $.ajax({
+        //   url: 'https://api.projectoxford.ai/face/v0/detections?subscription-key=f79747ed06a7400f8e1053a00639d44a',
+        //   type: 'POST',
+        //   contentType: 'application/octet-stream',
+        //   processData: false,
+        //   data: blobData,
+        //   success: function (data) {
+        //     // debugger;
+        //     var html = '';
+        //
+        //     $.each(data, function (commentIndex, object) {
+        //       var facebox = document.createElement( "div" );
+        //       $(facebox).css({
+        //         'position': 'absolute',
+        //         'top': object.faceRectangle.top,
+        //         'left': object.faceRectangle.left,
+        //         'width': object.faceRectangle.width,
+        //         'height': object.faceRectangle.height,
+        //         'border': '3px solid white'
+        //       });
+        //       // debugger;
+        //       var imgHolder = document.getElementsByClassName('img-holder')[0]
+        //       imgHolder.appendChild(facebox)
+        //       // html += 'faceid:' + object['faceId']+"\r\n";
+        //     });
+        //     // alert(html);
+        //   }
+        // })
         document.getElementById('photo').setAttribute('src', data);
       }
     }, false);
