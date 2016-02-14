@@ -144,7 +144,7 @@ var TwitterMood = React.createClass({
               onChange={this.handleChange}
               value={this.state.inputVal}
               placeholder="Enter Twitter Handle"/>
-            <div type="button" className="go-button" onClick={this.getTweets}>Go</div>
+            <input type="button" className="go-button" onClick={this.getTweets} value='Go'/>
         </div>
         <TwitterGraph tweets={this.state.tweets}/>
       </div>

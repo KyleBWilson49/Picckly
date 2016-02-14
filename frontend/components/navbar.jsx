@@ -11,7 +11,7 @@ var Navbar = React.createClass({
 
   moodringTab: function(e){
     e.preventDefault();
-    this.history.pushState('', '/moodring');
+    this.history.pushState('', '/');
   },
 
   graphsTab: function(e){
@@ -38,36 +38,38 @@ var Navbar = React.createClass({
   render: function(){
     var curr = this.state.current_tab;
     var moodring = curr === "moodring" ?
-                          <span className="navbar-tab moodring active"
+                          <span className="moodring active icon-bar navbar-tab"
                                 onClick={this.moodringTab}>Mood Ring</span> :
-                          <span className="navbar-tab moodring"
+                          <span className="moodring icon-bar navbar-tab"
                                 onClick={this.moodringTab}>Mood Ring</span>;
     var graphs = curr === "graphs" ?
-                          <span className="navbar-tab graphs active"
+                          <span className="graphs active icon-bar navbar-tab"
                                 onClick={this.graphsTab}>Graphs</span> :
-                          <span className="navbar-tab graphs"
+                          <span className="graphs icon-bar navbar-tab"
                                 onClick={this.graphsTab}>Graphs</span>;
-    var text = curr === "message" ?
-                          <span className="navbar-tab message active"
+    var text = curr === "text" ?
+                          <span className="text active icon-bar navbar-tab"
                                 onClick={this.textTab}>Text Mood</span> :
-                          <span className="navbar-tab message"
+                          <span className="text icon-bar navbar-tab"
                                 onClick={this.textTab}>Text Mood</span>;
     var twitter = curr === "twitter" ?
-                          <span className="navbar-tab twitter active"
+                          <span className="twitter active icon-bar navbar-tab"
                                 onClick={this.twitterTab}>Twitter</span> :
-                          <span className="navbar-tab twitter"
+                          <span className="twitter icon-bar navbar-tab"
                                 onClick={this.twitterTab}>Twitter</span>;
-    var logout =  <span className="navbar-tab logout"
-                        onClick={this.logoutTab}>Log Out</span>
+    var logout =  <span className="navbar-tab logout last icon-bar"
+                        onClick={this.logoutTab}>Log Out</span>;
 
     return(
-      <navbar className="navbar">
-        <div className="navbar-container">
-          {moodring}
-          {graphs}
-          {text}
-          {twitter}
-          {logout}
+      <navbar className="navbar navbar-default navbar-fixed-top">
+        <div className="container-fluid container navbar-container">
+          <div className="navbar-header">
+            {moodring}
+            {graphs}
+            {text}
+            {twitter}
+            {logout}
+          </div>
         </div>
       </navbar>
     );

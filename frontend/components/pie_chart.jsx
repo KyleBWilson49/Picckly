@@ -8,6 +8,14 @@ var PieChart = React.createClass({
 
   getInitialState: function(){
     this.emotionsHash = {};
+    this.emotionsHash["Anger"] = 0;
+    this.emotionsHash["Contempt"] = 0;
+    this.emotionsHash["Disgust"] = 0;
+    this.emotionsHash["Fear"] = 0;
+    this.emotionsHash["Happiness"] = 0;
+    this.emotionsHash["Neutral"] = 0;
+    this.emotionsHash["Sadness"] = 0;
+    this.emotionsHash["Surprise"] = 0;
     return {emotions: EmotionsStore.allEmotions()};
   },
 
@@ -31,14 +39,14 @@ var PieChart = React.createClass({
 
   gatherInfo: function(){
     this.state.emotions.forEach(function(emotionSet){
-      this.emotionsHash["Anger"] = emotionSet["anger"];
-      this.emotionsHash["Contempt"] = emotionSet["contempt"];
-      this.emotionsHash["Disgust"] = emotionSet["disgust"];
-      this.emotionsHash["Fear"] = emotionSet["fear"];
-      this.emotionsHash["Happiness"] = emotionSet["happiness"];
-      this.emotionsHash["Neutral"] = emotionSet["neutral"];
-      this.emotionsHash["Sadness"] = emotionSet["sadness"];
-      this.emotionsHash["Surprise"] = emotionSet["surprise"];
+      this.emotionsHash["Anger"] += emotionSet["anger"];
+      this.emotionsHash["Contempt"] += emotionSet["contempt"];
+      this.emotionsHash["Disgust"] += emotionSet["disgust"];
+      this.emotionsHash["Fear"] += emotionSet["fear"];
+      this.emotionsHash["Happiness"] += emotionSet["happiness"];
+      this.emotionsHash["Neutral"] += emotionSet["neutral"];
+      this.emotionsHash["Sadness"] += emotionSet["sadness"];
+      this.emotionsHash["Surprise"] += emotionSet["surprise"];
     }.bind(this));
     google.charts.setOnLoadCallback(this.drawChart);
   },

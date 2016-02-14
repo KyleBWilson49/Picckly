@@ -16,13 +16,13 @@
  body {
    background: #F7F7F7;
    margin: 0;
-   padding: 0;
+   padding-top: 40px;
    font-family: sans-serif;
  }
 
  #video-container {
    margin: 2em auto 0;
-   width: 500px;
+   width: 555px;
    padding: 2em;
    background: white;
    -webkit-box-shadow: 0 1px 10px #D9D9D9;
@@ -52,18 +52,22 @@
    }
 
    .navbar-tab {
-     padding: 5px 20px;
+     padding: 11px 20px;
      cursor: pointer;
      border-left: 1px solid black;
    }
 
-   .active {
-      border-bottom: 1px solid white;
-   }
-
-   .twitter{
+   .last {
      border-right: 1px solid black;
    }
+ //
+ //   .active {
+ //      border-bottom: 1px solid white;
+ //   }
+ //
+ //   .twitter{
+ //     border-right: 1px solid black;
+ //   }
  }
 
 .emotion-text {
