@@ -27,6 +27,13 @@
   }
 }
 
+.slider-box2 {
+  // position: relative;
+  height: 50px;
+  width: 500px;
+  // margin: auto;
+}
+
 .slider-box {
   // position: relative;
   height: 50px;
@@ -43,7 +50,9 @@
 .slider-bar2 {
   height: 100%;
   width: 100%;
-  background: linear-gradient(to right, white, blue);
+  background: linear-gradient(to right, white, black);
+  position: relative;
+  left: -50px;
 }
 
 .pointer {
@@ -53,6 +62,17 @@
   background: black;
   position: relative;
   bottom: 50px;
+}
+
+.pointer2 {
+  height: 100%;
+  width: 20px;
+  transition: all 2.5s;
+  background: #22a184;
+  position: relative;
+  bottom: 50px;
+  position: relative;
+  left: -50px;
 }
 
 .mood-sentence {

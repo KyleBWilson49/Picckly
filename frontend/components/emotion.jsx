@@ -7,7 +7,8 @@ var Emotion = React.createClass({
     return{
       emotionCheck: this.randomEmotion(),
       verified: false,
-      verifiedEmotions: 0
+      verifiedEmotions: 0,
+      pause: false
     };
   },
 
@@ -37,16 +38,32 @@ var Emotion = React.createClass({
 
     var interval = setInterval(function () {
       that.props.emotionCallback(that.state.emotionCheck);
-      if (that.props.emotionScore > 0.7) {
-        that.setState({ verifiedEmotions: that.state.verifiedEmotions + 1 });
-        if (that.state.verifiedEmotions >= 2) {
-          clearInterval(interval);
-          that.props.emotionsVerified();
-        } else {
-          that.setState({ emotionCheck: that.selectEmotion() });
-        }
+      if (!that.state.pause && that.props.emotionScore[1] > 0.7) {
+        that.setState({ verifiedEmotions: that.state.verifiedEmotions + 1, pause: true });
+        clearInterval(interval);
+        if (that.state.verifiedEmotions < 2) that.setState({ emotionCheck: that.selectEmotion() });
+        that.checkFinishEmotion();
       }
-    }, 2000);
+    }, 2500);
+  },
+
+  componentWillReceiveProps: function (prop) {
+    if (this.state.pause && (prop.emotionScore[0] === this.state.emotionCheck)) {
+      this.setState({
+        pause: false
+      })
+    }
+  },
+
+  checkFinishEmotion: function () {
+    var that = this;
+    if (this.state.verifiedEmotions >= 2) {
+      this.props.emotionsVerified();
+    } else {
+      setTimeout(function () {
+        that.checkEmotion()
+      }, 1000)
+    }
   },
 
   emotionFace: function () {
@@ -61,16 +78,25 @@ var Emotion = React.createClass({
 
   render: function () {
     var face = this.emotionFace();
+    var score = 0;
+    if (!this.state.pause) {
+      score = this.props.emotionScore[1];
+    }
+
+    var left = 480*score + "px";
+    var style = {transform:"translateX(" + left + ")"};
+
+
     return (
       <div>
         <section className="emotion-text">
           Hello {this.props.username}! <br/>
           Make a {this.state.emotionCheck} face {face}<br/>
-          {Math.floor(this.props.emotionScore * 100) + "%"}
         </section>
-        <section>
-
-        </section>
+        <div className="slider-box2">
+          <div className="slider-bar2"></div>
+          <div className="pointer2" style={style}></div>
+        </div>
       </div>
     );
   }

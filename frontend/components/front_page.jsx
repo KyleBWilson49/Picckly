@@ -42,7 +42,7 @@ var FrontPage = React.createClass({
         if (!emotion) {
           ApiUtil.postEmotion(data[0].scores);
         } else {
-          that.setState({ emotionScore: data[0].scores[emotion] });
+          that.setState({ emotionScore: [emotion, data[0].scores[emotion]] });
         }
       }
     });
