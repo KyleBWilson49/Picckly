@@ -22,7 +22,7 @@ var Emotion = React.createClass({
     var selected = false;
     var selectedEmotion;
     while (!selected) {
-      selectedEmotion = this.randomEmotion()
+      selectedEmotion = this.randomEmotion();
       if (selectedEmotion !== that.state.emotionCheck) {
         selected = true;
       }
