@@ -12,8 +12,8 @@ var PieChart = React.createClass({
   },
 
   _emotionsChanged: function(){
-    debugger;
     this.setState({emotions: EmotionsStore.allEmotions()});
+    this.gatherInfo();
   },
 
   componentWillMount: function(){
@@ -29,24 +29,27 @@ var PieChart = React.createClass({
   gatherInfo: function(){
     this.state.emotions.forEach(function(emotionSet){
       this.emotionsHash["anger"] = emotionSet["anger"];
-    });
-
+      this.emotionsHash["contempt"] = emotionSet["contempt"];
+      this.emotionsHash["disgust"] = emotionSet["disgust"];
+      this.emotionsHash["fear"] = emotionSet["fear"];
+      this.emotionsHash["happiness"] = emotionSet["happiness"];
+      this.emotionsHash["neutral"] = emotionSet["neutral"];
+      this.emotionsHash["sadness"] = emotionSet["sadness"];
+      this.emotionsHash["surprise"] = emotionSet["surprise"];
+    }.bind(this));
   },
 
   drawChart: function() {
-    var data = google.visualization.arrayToDataTable([
-      // []
+    var emotionsArray = [["Emotion", "Level"]];
 
-      // ['Task', 'Hours per Day'],
-      // ['Work',     11],
-      // ['Eat',      2],
-      // ['Commute',  2],
-      // ['Watch TV', 2],
-      // ['Sleep',    7]
-    ]);
+    Object.keys(this.emotionsHash).forEach(function(key){
+      emotionsArray.push([key, this.emotionsHash[key]]);
+    }.bind(this));
+
+    var data = google.visualization.arrayToDataTable(emotionsArray);
 
     var options = {
-      title: 'My Daily Activities'
+      title: 'Emotional Percentage'
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -55,7 +58,7 @@ var PieChart = React.createClass({
   },
 
   render: function(){
-    debugger;
+    // debugger;
     return (
       <div id="piechart"></div>
     );
