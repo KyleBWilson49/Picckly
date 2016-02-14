@@ -1,6 +1,6 @@
 var React = require('react');
 
-var emotions = ["happiness", "sadness", "anger", "surprise"];
+var emotions = ["happiness", "sadness", "neutral"];
 
 var Emotion = React.createClass({
   getInitialState: function () {
@@ -45,7 +45,7 @@ var Emotion = React.createClass({
         clearInterval(interval);
         console.log("You DID IT!!");
       }
-    }, 1500);
+    }, 2000);
   },
 
   emotionFace: function () {
