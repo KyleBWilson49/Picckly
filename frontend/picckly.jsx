@@ -17,6 +17,7 @@ var App = React.createClass({
 var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={FrontPage}/>
+    <Route path="/piechart" component={PieChart}/>
   </Route>
 );
 
