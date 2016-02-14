@@ -64,6 +64,7 @@ var PieChart = React.createClass({
       title: 'Emotion Totals',
       chartArea: {height: '80%', width: '90%'},
       legend: { position: 'none' },
+      colors: ['#cc3838', '#b238c9', '#66f293', '#850606', '#dcdd50', '#444444', '#6784ec', '#eca02c'],
       background: {color: 'transparent'}
     };
 
