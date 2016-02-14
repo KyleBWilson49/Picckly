@@ -44,15 +44,21 @@ var Message = React.createClass({
   // },
 
   render: function(){
+    var percent = 100*this.state.moodVal + "%";
+    var style = {left:percent};
     return (
-      <div>
+      <div className="outer-message-div">
         <textarea
-           rows="4"
-           cols="50"
-           className="form-control"
+           rows="20"
+           cols="100"
+           className="text-form"
            onChange={this.handleChange}
            value={this.state.inputVal}/>
-         <div>{this.state.moodVal}</div>
+         <div className="slider-box">
+           <div className="slider-bar"></div>
+           <div className="pointer" style={style}></div>
+           <div className='mood-sentence'>Current message mood: {100*this.state.moodVal}</div>
+         </div>
       </div>
     );
   }
