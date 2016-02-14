@@ -248,11 +248,15 @@ var FrontPage = React.createClass({
   },
 
   render: function () {
+    var switchLoginState;
     if (this.state.logIn) {
-
+      switchLoginState = <div>Sign Up</div>;
+    } else {
+      switchLoginState = <div>Sign In</div>;
     }
     return (
       <div>
+        {switchLoginState}
         <button id="take">Take a photo</button>
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
