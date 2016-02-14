@@ -41,6 +41,8 @@
   padding: 10px;
   text-align: center;
   color: blue;
+  width: 260px;
+  margin: auto;
   /* background: lightgreen; */
   border-radius: 10px;
   margin-top: 10px;
@@ -68,6 +70,7 @@
 
 .page-commands #take:hover {
   background: lightgreen;
+  cursor: pointer;
 }
 
 .page-commands .userName {

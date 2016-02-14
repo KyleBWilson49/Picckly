@@ -43,8 +43,7 @@ var LineGraph = React.createClass({
       legend: { position: 'none' },
       chartArea: {width: '90%', height: '80%'},
       vAxis: {minValue: '0', maxValue: '1'},
-      // title: 'Mood Over Time'
-
+      colors: ['#22a184']
     };
 
     this.chart.draw(data, options);
@@ -124,14 +123,4 @@ var LineGraph = React.createClass({
   }
 });
 
-// <select onChange={this.changeEmotion}>
-//   <option value='anger'>Anger</option>
-//   <option value='contempt'>Contempt</option>
-//   <option value='disgust'>Disgust</option>
-//   <option value='fear'>Fear</option>
-//   <option value='happiness'>Happiness</option>
-//   <option value='neutral'>Neutral</option>
-//   <option value='sadness'>Sadness</option>
-//   <option value='surprise'>Surprise</option>
-// </select>
 module.exports = LineGraph;
