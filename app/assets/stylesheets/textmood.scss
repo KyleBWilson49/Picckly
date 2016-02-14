@@ -3,16 +3,31 @@
   width: 100%;
 }
 
-textarea.text-form {
+.text-form {
+  // display: block;
+  // position: relative;
+  // top: 100px;
+  height: 400px;
+  padding: 0px;
+  width: 498px;
+  font-size: 24px;
+  // margin: auto;
+}
+
+.form-and-slider {
+  display: block;
+  position: relative;
+  top: 100px;
   height: 100%;
   width: 500px;
-  // margin: 0 auto;
+  margin: auto;
 }
 
 .slider-box {
+  // position: relative;
   height: 50px;
-  width: 500px;
-  // margin: 0 auto;
+  width: 100%;
+  // margin: auto;
 }
 
 .slider-bar {
@@ -27,4 +42,10 @@ textarea.text-form {
   background: black;
   position: relative;
   bottom: 50px;
+}
+
+.mood-sentence {
+  position: relative;
+  bottom: 36px;
+  font-size: 24px;
 }

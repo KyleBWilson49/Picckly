@@ -1,14 +1,18 @@
 var React = require('react');
 var Emotion = require('./emotion.jsx');
 var Emotion = require('./emotion');
+var MoodRing = require('./mood_ring.jsx');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
       return {
         logIn: "Sign In",
         userName: "",
+        personId: "",
+        blobData: "",
         emotionTest: false,
-        emotionScore: 0
+        emotionScore: 0,
+        currentUser: null
       };
   },
 
@@ -26,7 +30,6 @@ var FrontPage = React.createClass({
       data: blobData,
       emotion: emotion,
       success: function (data) {
-        // debugger;
         var emotion = this.emotion;
         that.setState({ emotionScore: data[0].scores[emotion] });
       }
@@ -50,10 +53,6 @@ var FrontPage = React.createClass({
   },
 
   componentDidMount: function () {
-    // setTimeout(function () {
-    //   that.setState({ emotionTest: true });
-    // }, 2000);
-
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.webkitGetUserMedia ||
                               navigator.mozGetUserMedia ||
@@ -175,6 +174,7 @@ var FrontPage = React.createClass({
     })
     .done(function(data) {
       console.log(data);
+      that.createUser(userName);
       that.addPersonFace(data.personId, blobData);
     })
     .fail(function() {
@@ -248,11 +248,66 @@ var FrontPage = React.createClass({
     })
     .done(function(data) {
       var personId = data[0].candidates[0].personId;
-      that.addPersonFace(personId, blobData);
-      console.log(data);
+      that.setState({ emotionTest: true, personId: personId });
+      that.getUserName(personId);
+      that.blobData = blobData;
     })
     .fail(function() {
         alert("error");
+    });
+  },
+
+  getUserName: function (personId) {
+    var that = this;
+    var userName = '';
+    $.ajax({
+      url: "https://api.projectoxford.ai/face/v1.0/persongroups/piccklydevweek/persons/" + personId,
+      beforeSend: function(xhrObj){
+          xhrObj.setRequestHeader("Content-Type","application/json");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","f79747ed06a7400f8e1053a00639d44a");
+      },
+      type: "GET",
+    })
+    .done(function(data) {
+      that.setState({ userName: data.name });
+    })
+    .fail(function() {
+        alert("error");
+    });
+  } ,
+
+  emotionsVerified: function () {
+    this.addPersonFace(this.state.personId, this.blobData);
+    this.giveUserSessionToken();
+  },
+
+  giveUserSessionToken: function () {
+    var that = this;
+    $.ajax({
+      url: "/api/sessions",
+      data: { username: this.state.userName },
+      type: "POST"
+    })
+    .done(function (data) {
+      that.setState({ currentUser: this.state.userName });
+    })
+    .fail(function (error) {
+      alert(error);
+    });
+  },
+
+  createUser: function (userName) {
+    var that = this;
+    $.ajax({
+      url: "/api/users",
+      data: { user: { username: userName, twitter: "" } },
+      type: "POST"
+    })
+    .done(function(data) {
+      that.setState({ currentUser: userName });
+    })
+    .fail(function() {
+      alert('failed to create user');
     });
   },
 
@@ -297,24 +352,38 @@ var FrontPage = React.createClass({
     var emotionTest;
     if (this.state.emotionTest) {
       emotionTest = (
-        <Emotion username="Kyle"
+        <Emotion username={this.state.userName}
           emotionCallback={this.checkEmotion}
           detectCallback={this.detectPerson}
-          emotionScore={this.state.emotionScore}/>
+          emotionScore={this.state.emotionScore}
+          emotionsVerified={this.emotionsVerified}/>
       );
     } else {
       emotionTest = "";
     }
 
+    var view;
+    if (this.state.currentUser) {
+      view = (
+        <MoodRing />
+      );
+    } else {
+      view = (
+        <div>
+          {switchLoginState}
+          {pageCommands}
+          {emotionTest}
+        </div>
+      );
+    }
+
     return (
       <div>
-        {switchLoginState}
-        {pageCommands}
+        {view}
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
-        {emotionTest}
         <div className="img-holder">
           <img src="" id="photo"/>
         </div>
