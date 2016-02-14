@@ -11,21 +11,27 @@ var MoodRing;
 var TwitterMood = require('./components/twittermood.jsx');
 var MoodRing = require('./components/mood_ring.jsx');
 
-
 var App = React.createClass({
   render: function () {
     return (
-      <div>{this.props.children}</div>
+      <div>
+        <FrontPage/>
+        {this.props.children}
+      </div>
     );
   },
 });
 
 var routes = (
   <Route path="/" component={App}>
+<<<<<<< HEAD
+    <Route path="/message" component={Message}/>
+=======
     <IndexRoute component={FrontPage}/>
     <Route path="/moodring" component={MoodRing}/>
     <Route path="/graphs" component={Graphs}/>
     <Route path="/moodring" component={MoodRing}/>
+>>>>>>> 83090d6e72feaae1e17f832a292652aefbf4957b
     <Route path="/graphs" component={Graphs}/>
     <Route path="/textmood" component={TextMood}/>
     <Route path="/twittermood" component={TwitterMood}/>

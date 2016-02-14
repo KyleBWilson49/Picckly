@@ -1,5 +1,4 @@
 var React = require('react');
-var Emotion = require('./emotion.jsx');
 var Emotion = require('./emotion');
 var MoodRing = require('./mood_ring.jsx');
 var ApiUtil = require('../util/api_util');
