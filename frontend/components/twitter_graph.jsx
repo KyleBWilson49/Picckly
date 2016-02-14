@@ -17,13 +17,13 @@ var TwitterGraph = React.createClass({
 
   gatherInfo: function(){
     // console.log(this.props.tweets)
-    this.dataPoints = [['date', 'Positivity']];
+    this.dataPoints = [];
     // debugger;
     if (this.props.tweets[0] && this.props.tweets[0].score) {
 
       this.props.tweets.forEach(function(tweet){
         // debugger;
-        this.dataPoints.push(['', tweet.score]);
+        this.dataPoints.push([tweet.created_at.slice(4,10), tweet.score]);
       }.bind(this));
       // console.log(this.dataPoints)
       // EmotionsStore.allEmotions().forEach(function(emotionSet){
@@ -33,6 +33,8 @@ var TwitterGraph = React.createClass({
       //   // debugger;
       //   this.dataPoints.push(['', emotionSet[this.state.emotion]]);
       // }.bind(this));
+      this.dataPoints.push(['date', 'Positivity']);
+      this.dataPoints = this.dataPoints.reverse();
       google.charts.setOnLoadCallback(this.drawChart);
 
     }
@@ -73,7 +75,7 @@ var TwitterGraph = React.createClass({
     if (this.props.tweets[0] && this.props.tweets[0].score) {
       map = this.props.tweets.map(function(tweet){
         if (typeof tweet !== 'undefined') {
-          return <div className="tweets">{tweet.text}</div>
+          return <div style={{background:"rgba(" + Math.floor(250*(1-tweet.score)) + "," + Math.floor(250*tweet.score) + ",0,0.8)"}} className="tweets">{tweet.text}</div>
         }
       }.bind(this));
     }
