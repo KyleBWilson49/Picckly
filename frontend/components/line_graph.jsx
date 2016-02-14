@@ -23,7 +23,11 @@ var LineGraph = React.createClass({
 
 
     EmotionsStore.allEmotions().forEach(function(emotionSet){
-      this.dataPoints.push([emotionSet['created_at'], emotionSet[this.state.emotion]]);
+      // var timeCreated = new Date(emotionSet['created_at']);
+      // var timeNow = new Date();
+      // var timeDiff = (timeNow.getTime() - timeCreated.getTime()) / 360000;
+      // debugger;
+      this.dataPoints.push(['', emotionSet[this.state.emotion]]);
     }.bind(this));
     google.charts.setOnLoadCallback(this.drawChart);
   },
@@ -36,14 +40,7 @@ var LineGraph = React.createClass({
     if (this.dataPoints.length == 0) {
       return;
     }
-    var data = google.visualization.arrayToDataTable( this.dataPoints
-      // [
-      // ['Year', 'Sales', ],
-      // ['2004',  1000,],
-      // ['2005',  1170,],
-      // ['2006',  660,  ],
-      // ['2007',  1030,]]
-    );
+    var data = google.visualization.arrayToDataTable(this.dataPoints);
 
 
     var chart = new google.visualization.LineChart(document.getElementById('line_graph'));
@@ -58,10 +55,8 @@ var LineGraph = React.createClass({
   },
 
   render: function(){
-
     return (
       <div>
-        hello you are {this.state.emotion}
         <div id='line_graph'>
         </div>
         <select onChange={this.changeEmotion}>

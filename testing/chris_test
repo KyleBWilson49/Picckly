@@ -1,0 +1,21 @@
+document.getElementById('emailsubmit').addEventListener('click', function(){
+  var acctkey = window.btoa("AccountKey:eATIdDoYXwTq/ig6ZMB/sAz0lmiP9oL7DzDS6PExI4A");
+​
+  $.ajax({
+    url: "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentiment?",
+    beforeSend: function(xhrObj){
+        xhrObj.setRequestHeader("Accept","application/json");
+        xhrObj.setRequestHeader("Authorization","Basic " + acctkey);
+    },
+    type: "GET",
+    data: {
+      Text:"Hello World"
+    }
+  })
+  .done(function(data) {
+      console.log(data);
+  })
+  .fail(function() {
+      alert("error");
+  });
+});

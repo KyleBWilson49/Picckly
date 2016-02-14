@@ -4,6 +4,7 @@ var EmotionsStore = require('../stores/emotions_store');
 var ApiUtil = require('../util/api_util');
 var PieChart = require('./pie_chart');
 var LineGraph = require('./line_graph');
+var BarGraph = require('./bar_graph');
 
 
 var Graphs = React.createClass({
@@ -18,6 +19,7 @@ var Graphs = React.createClass({
       <div>
         <PieChart />
         <LineGraph />
+        <BarGraph/>
       </div>
     );
   }
