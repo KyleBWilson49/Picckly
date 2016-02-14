@@ -280,11 +280,22 @@ var FrontPage = React.createClass({
   },
 
   giveUserSessionToken: function () {
-
+    
   },
 
   createUser: function (userName) {
-
+    var that = this;
+    $.ajax({
+      url: "/api/users",
+      data: { user: { username: userName, twitter: "" } },
+      type: "POST"
+    })
+    .done(function(data) {
+      that.history.pushState(null, "/moodring");
+    })
+    .fail(function() {
+      alert('failed to create user');
+    });
   },
 
   changePageState: function () {
