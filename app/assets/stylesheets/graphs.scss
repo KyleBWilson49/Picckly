@@ -1,14 +1,71 @@
+.graphs {
+  width: 100%;
+  margin: auto;
+}
+
+.top-graphs {
+  width: 100%;
+  margin: auto;
+}
+
 #line_graph {
   height: 400px;
-  width: 700px;
+  width: 1000px;
+  clear: both;
+  float: left;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
 }
 
 #pie_chart {
   height: 400px;
-  width: 700px;
+  width: 40%;
+  float: left;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 #bar_graph {
   height: 400px;
-  width: 700px;
+  width: 59%;
+  float: left;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.bottom-graph {
+  margin: auto;
+  width: 1200px;
+}
+
+#emotion-list {
+  float: left;
+  list-style: none;
+  height: 400px;
+  padding: 0px;
+  margin: 0px;
+  width: 160px;
+
+  li {
+    width: 100%;
+    cursor: pointer;
+    font-size: 24px;
+    height: 9.52%;
+    display: block;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    margin: 0px;
+    text-align: center;
+    padding-top: 11px;
+  }
+
+  .active {
+    background-color: white;
+    border-left: 1px solid white;
+  }
+
+  .last {
+    // border-bottom: 1px solid black;
+  }
 }

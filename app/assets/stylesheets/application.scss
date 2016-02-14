@@ -17,6 +17,7 @@
    background: #F7F7F7;
    margin: 0;
    padding: 0;
+   font-family: sans-serif;
  }
 
  #video-container {
@@ -43,6 +44,7 @@
    font-size: 30px;
    width: 100%;
    text-align: center;
+   height: 40px;
 
    .navbar-container{
      width: 900px;
@@ -50,7 +52,7 @@
    }
 
    .navbar-tab {
-     padding: 0px 20px;
+     padding: 5px 20px;
      cursor: pointer;
      border-left: 1px solid black;
    }
