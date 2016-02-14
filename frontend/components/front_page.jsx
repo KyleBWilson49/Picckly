@@ -274,6 +274,7 @@ var FrontPage = React.createClass({
     })
     .fail(function() {
         console.log("error in identify person");
+        alert("Can not find user. Please sign up.");
     });
   },
 
