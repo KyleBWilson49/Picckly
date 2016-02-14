@@ -24,6 +24,16 @@ var ApiUtil = {
         ApiActions.receiveTweets(tweets);
       }
     });
+  },
+
+  logOut: function() {
+    $.ajax({
+      method: "DELETE",
+      url: "api/session",
+      success: function () {
+        window.currentUserId = '';
+      }
+    });
   }
 };
 

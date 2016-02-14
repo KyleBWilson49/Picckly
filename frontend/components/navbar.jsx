@@ -1,5 +1,6 @@
 var React = require('react');
 var History = require('react-router').History;
+var ApiUtil = require('../util/api_util');
 
 
 var Navbar = React.createClass({
@@ -29,6 +30,14 @@ var Navbar = React.createClass({
     this.history.pushState('', '/twitter');
   },
 
+  logoutTab: function (e) {
+
+    e.preventDefault();
+    ApiUtil.logOut();
+    this.history.pushState(null, '/');
+    console.log('hello');
+  },
+
   render: function(){
     var curr = this.state.current_tab;
     var moodring = curr === "moodring" ?
@@ -51,6 +60,11 @@ var Navbar = React.createClass({
                                 onClick={this.twitterTab}>Twitter</span> :
                           <span className="navbar-tab twitter"
                                 onClick={this.twitterTab}>Twitter</span>;
+    var logout = curr === "logout" ?
+                          <span className="navbar-tab logout active"
+                                onClick={this.logoutTab}>Log Out</span> :
+                          <span className="navbar-tab logout"
+                                onClick={this.logoutTab}>Log Out</span>;
 
     return(
       <navbar className="navbar">
@@ -59,6 +73,7 @@ var Navbar = React.createClass({
           {graphs}
           {text}
           {twitter}
+          {logout}
         </div>
       </navbar>
     );
