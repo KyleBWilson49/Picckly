@@ -1,0 +1,37 @@
+#twitter_graph{
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.tweets {
+  padding: 15px;
+  width: 75%;
+  margin: auto;
+  display: block;
+
+}
+
+.outer-handle{
+  margin: 20px auto 10px;
+/* display: block; */
+  width: 330px;
+  height: 30px;
+  font-size: 24px;
+}
+
+.twitter-handle{
+  float:left;
+  padding: 0px;
+  // margin: 20px auto 10px;
+  // display: block;
+  // width: 300px;
+  height: 100%;
+  font-size: 24px;
+}
+
+.go-button{
+  background: green;
+  height: 100%;
+  float: left;
+  padding: 2px;
+}
