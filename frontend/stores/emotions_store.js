@@ -18,5 +18,21 @@ EmotionsStore.allEmotions = function(){
   return _emotions.slice(0);
 };
 
+EmotionsStore.mostRecent = function(){
+  if (_emotions.length === 0) {
+    return {
+      anger: 0,
+      contempt: 0,
+      disgust: 0,
+      fear: 0,
+      happiness: 0,
+      neutral: 0,
+      sadness: 0,
+      surprise: 0
+    };
+  } else {
+    return _emotions[_emotions.length - 1];
+  }
+};
 
 module.exports = EmotionsStore;
