@@ -8,6 +8,14 @@ var ApiUtil = {
       success: ApiActions.receiveEmotions
     });
   },
+
+
+  postEmotion: function (emotion) {
+    $.post("api/emotions", { emotion: emotion}, function (emotion) {
+      ApiActions.receiveSingleEmotion(emotion);
+    });
+  },
+
   fetchTwitter: function(handle){
     $.ajax({
       method: "POST",

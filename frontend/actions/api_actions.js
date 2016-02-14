@@ -7,6 +7,14 @@ var ApiActions = {
       emotions: emotions
     });
   },
+
+  receiveSingleEmotion: function (emotion) {
+    AppDispatcher.dispatch({
+      actionType: "SINGLE_EMOTION_RECEIVED",
+      emotion: emotion
+    });
+  },
+
   receiveTweets: function(tweets) {
     AppDispatcher.dispatch({
       actionType: "TWEETS_RECEIVED",

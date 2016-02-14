@@ -1,7 +1,7 @@
 var React = require('react');
-var Emotion = require('./emotion.jsx');
 var Emotion = require('./emotion');
 var MoodRing = require('./mood_ring.jsx');
+var ApiUtil = require('../util/api_util');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
@@ -19,6 +19,9 @@ var FrontPage = React.createClass({
   checkEmotion: function(emotion) {
     var blobData = this.getImage();
     var that = this;
+    if (!emotion) {
+      var emotionExist = false;
+    }
     $.ajax({
       url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
       beforeSend: function(xhrObj){
@@ -30,8 +33,12 @@ var FrontPage = React.createClass({
       data: blobData,
       emotion: emotion,
       success: function (data) {
-        var emotion = this.emotion;
-        that.setState({ emotionScore: data[0].scores[emotion] });
+        if (emotion) {
+          ApiUtil.postEmotion(data[0].scores);
+        } else {
+          emotion = this.emotion;
+          that.setState({ emotionScore: data[0].scores[emotion] });
+        }
       }
     });
   },
