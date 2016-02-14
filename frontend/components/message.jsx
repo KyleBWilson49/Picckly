@@ -12,9 +12,30 @@ var Message = React.createClass({
   },
   handleChange: function(e) {
     if (e.target.value[e.target.value.length-1] === " ") {
-      
+      this.apiCall(e.target.value);
     }
     this.setState({ inputVal: e.target.value })
+  },
+  apiCall: function(messageText) {
+    var that = this;
+    var acctkey = window.btoa("AccountKey:eATIdDoYXwTq/ig6ZMB/sAz0lmiP9oL7DzDS6PExI4A");
+    $.ajax({
+      url: "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentiment?",
+      beforeSend: function(xhrObj){
+          xhrObj.setRequestHeader("Accept","application/json");
+          xhrObj.setRequestHeader("Authorization","Basic " + acctkey);
+      },
+      type: "GET",
+      data: {
+        Text:messageText
+      }
+    })
+    .done(function(data) {
+        that.setState({ moodVal: data.Score})
+    })
+    .fail(function() {
+        alert("error");
+    });
   },
 
   // componentDidMount: function(){
@@ -23,15 +44,21 @@ var Message = React.createClass({
   // },
 
   render: function(){
+    var percent = 100*this.state.moodVal + "%";
+    var style = {left:percent};
     return (
-      <div>
+      <div className="outer-message-div">
         <textarea
-           rows="4"
-           cols="50"
-           className="form-control"
+           rows="20"
+           cols="100"
+           className="text-form"
            onChange={this.handleChange}
            value={this.state.inputVal}/>
-         <div>{this.state.moodVal}</div>
+         <div className="slider-box">
+           <div className="slider-bar"></div>
+           <div className="pointer" style={style}></div>
+           <div className='mood-sentence'>Current message mood: {100*this.state.moodVal}</div>
+         </div>
       </div>
     );
   }
