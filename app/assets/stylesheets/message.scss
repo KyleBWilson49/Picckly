@@ -1,0 +1,29 @@
+.outer-message-div {
+  height: 100%;
+  width: 100%;
+}
+
+textarea.text-form {
+  height: 100%;
+  width: 500px;
+  // margin: 0 auto;
+}
+
+.slider-box {
+  height: 50px;
+  width: 500px;
+  // margin: 0 auto;
+}
+
+.slider-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, red, yellow, #66FF00);
+}
+.pointer {
+  height: 100%;
+  width: 20px;
+  background: black;
+  position: relative;
+  bottom: 50px;
+}
