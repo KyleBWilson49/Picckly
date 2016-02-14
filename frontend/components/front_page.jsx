@@ -399,7 +399,6 @@ var FrontPage = React.createClass({
 
     return (
       <div>
-        {view}
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
@@ -407,6 +406,7 @@ var FrontPage = React.createClass({
         <div className="img-holder">
           <img src="" id="photo"/>
         </div>
+        {view}
       </div>
     );
   }
