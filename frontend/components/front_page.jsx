@@ -1,9 +1,6 @@
 var React = require('react');
-<<<<<<< HEAD
 var Emotion = require('./emotion.jsx');
-=======
 var Emotion = require('./emotion');
->>>>>>> fc3c87d5773dd8d66beceb47025a48be8d370ce1
 
 var FrontPage = React.createClass({
   getInitialState: function () {

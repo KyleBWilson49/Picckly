@@ -21,19 +21,18 @@ var Emotion = React.createClass({
   selectEmotion: function () {
     var selected = false;
     var selectedEmotion;
-<<<<<<< HEAD
     while (selected === false) {
       selectedEmotion = emotions[Math.floor(Math.random() * emotions.length)];
       if (selectedEmotion !== this.state.emotionCheck) {
-=======
-    while (!selected) {
-      selectedEmotion = this.randomEmotion()
-      if (selectedEmotion !== that.state.emotionCheck) {
->>>>>>> fc3c87d5773dd8d66beceb47025a48be8d370ce1
-        selected = true;
+        while (!selected) {
+          selectedEmotion = this.randomEmotion();
+          if (selectedEmotion !== that.state.emotionCheck) {
+            selected = true;
+          }
+        }
       }
-    }
     return selectedEmotion;
+    }
   },
 
   checkEmotion: function () {
