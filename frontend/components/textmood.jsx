@@ -69,7 +69,6 @@ var TextMood = React.createClass({
     var style = {transform:"translateX(" + left + ")"};
     return (
       <div className="outer-message-div">
-        <Navbar active="text"/>
         <div className="form-and-slider">
           <textarea
              rows="20"
