@@ -131,6 +131,7 @@ var FrontPage = React.createClass({
   _onChange: function () {
     if (!window.currentUser) {
       this.setState({ currentUser: window.currentUser});
+      this.setState({ emotionTest: false });
     }
   },
 
