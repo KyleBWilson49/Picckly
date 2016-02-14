@@ -41,7 +41,7 @@ var Emotion = React.createClass({
         that.setState({ verifiedEmotions: that.state.verifiedEmotions + 1 });
         if (that.state.verifiedEmotions >= 2) {
           clearInterval(interval);
-          this.props.emotionsVerified();
+          that.props.emotionsVerified();
         } else {
           that.setState({ emotionCheck: that.selectEmotion() });
         }

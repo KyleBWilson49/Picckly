@@ -1,5 +1,7 @@
 var React = require('react');
 var Emotion = require('./emotion');
+var MoodRing = require('./mood_ring.jsx');
+var ApiUtil = require('../util/api_util');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
@@ -9,13 +11,17 @@ var FrontPage = React.createClass({
         personId: "",
         blobData: "",
         emotionTest: false,
-        emotionScore: 0
+        emotionScore: 0,
+        currentUser: null
       };
   },
 
   checkEmotion: function(emotion) {
     var blobData = this.getImage();
     var that = this;
+    if (!emotion) {
+      var emotionExist = false;
+    }
     $.ajax({
       url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
       beforeSend: function(xhrObj){
@@ -27,8 +33,12 @@ var FrontPage = React.createClass({
       data: blobData,
       emotion: emotion,
       success: function (data) {
-        var emotion = this.emotion;
-        that.setState({ emotionScore: data[0].scores[emotion] });
+        if (emotion) {
+          ApiUtil.postEmotion(data[0].scores);
+        } else {
+          emotion = this.emotion;
+          that.setState({ emotionScore: data[0].scores[emotion] });
+        }
       }
     });
   },
@@ -245,7 +255,8 @@ var FrontPage = React.createClass({
     })
     .done(function(data) {
       var personId = data[0].candidates[0].personId;
-      var userName = that.getUserName(personId);
+      that.setState({ emotionTest: true, personId: personId });
+      that.getUserName(personId);
       that.blobData = blobData;
     })
     .fail(function() {
@@ -265,12 +276,11 @@ var FrontPage = React.createClass({
       type: "GET",
     })
     .done(function(data) {
-      userName = data[0].name;
+      that.setState({ userName: data.name });
     })
     .fail(function() {
         alert("error");
     });
-    return userName;
   } ,
 
   emotionsVerified: function () {
@@ -279,11 +289,33 @@ var FrontPage = React.createClass({
   },
 
   giveUserSessionToken: function () {
-
+    var that = this;
+    $.ajax({
+      url: "/api/sessions",
+      data: { username: this.state.userName },
+      type: "POST"
+    })
+    .done(function (data) {
+      that.setState({ currentUser: this.state.userName });
+    })
+    .fail(function (error) {
+      alert(error);
+    });
   },
 
   createUser: function (userName) {
-
+    var that = this;
+    $.ajax({
+      url: "/api/users",
+      data: { user: { username: userName, twitter: "" } },
+      type: "POST"
+    })
+    .done(function(data) {
+      that.setState({ currentUser: userName });
+    })
+    .fail(function() {
+      alert('failed to create user');
+    });
   },
 
   changePageState: function () {
@@ -337,15 +369,28 @@ var FrontPage = React.createClass({
       emotionTest = "";
     }
 
+    var view;
+    if (this.state.currentUser) {
+      view = (
+        <MoodRing />
+      );
+    } else {
+      view = (
+        <div>
+          {switchLoginState}
+          {pageCommands}
+          {emotionTest}
+        </div>
+      );
+    }
+
     return (
       <div>
-        {switchLoginState}
-        {pageCommands}
+        {view}
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
-        {emotionTest}
         <div className="img-holder">
           <img src="" id="photo"/>
         </div>
