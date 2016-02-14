@@ -105,7 +105,7 @@ var TwitterMood = React.createClass({
   },
 
   getTweets: function() {
-    ApiUtil.fetchTwitter(this.state.inputVal)
+    ApiUtil.fetchTwitter(this.state.inputVal);
   },
   apiCall: function(tweet, idx, tweets) {
     var that = this;
@@ -130,7 +130,7 @@ var TwitterMood = React.createClass({
       // ApiActions.receiveScores(data);
     })
     .fail(function() {
-      alert("error");
+      console.log("twitter api");
     });
   },
 

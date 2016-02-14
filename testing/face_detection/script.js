@@ -77,10 +77,10 @@ window.onload = function() {
             data: blobData,
         })
         .done(function(data) {
-            console.log(data[0].scores.anger)
+            console.log(data[0].scores.anger);
         })
         .fail(function() {
-            alert("error");
+            console.log("blob data error");
         });
 
         // DETECTION BELOW
@@ -109,7 +109,7 @@ window.onload = function() {
         //       imgHolder.appendChild(facebox)
         //       // html += 'faceid:' + object['faceId']+"\r\n";
         //     });
-        //     // alert(html);
+        //     // console.log(html);
         //   }
         // })
         document.getElementById('photo').setAttribute('src', data);
@@ -119,6 +119,6 @@ window.onload = function() {
 
 
   } else {
-    alert('Sorry, your browser does not support getUserMedia');
+    console.log('Sorry, your browser does not support getUserMedia');
   }
 }

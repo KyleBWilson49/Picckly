@@ -16,6 +16,6 @@ document.getElementById('emailsubmit').addEventListener('click', function(){
       console.log(data);
   })
   .fail(function() {
-      alert("error");
+      console.log("chris test");
   });
 });

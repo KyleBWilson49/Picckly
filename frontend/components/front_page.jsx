@@ -117,14 +117,14 @@ var FrontPage = React.createClass({
           //       imgHolder.appendChild(facebox)
           //       // html += 'faceid:' + object['faceId']+"\r\n";
           //     });
-          //     // alert(html);
+          //     // console.log(html);
           //   }
           // })
           document.getElementById('photo').setAttribute('src', data);
         }
       }.bind(this), false);
     } else {
-      alert('Sorry, your browser does not support getUserMedia');
+      console.log('Sorry, your browser does not support getUserMedia');
     }
   },
 
@@ -171,7 +171,7 @@ var FrontPage = React.createClass({
           // imgHolder.appendChild(facebox);
           // html += 'faceid:' + object['faceId']+"\r\n";
         // });
-        // alert(html);
+        // console.log(html);
       }
     });
   },
@@ -198,7 +198,7 @@ var FrontPage = React.createClass({
       that.addPersonFace(data.personId, blobData);
     })
     .fail(function() {
-        alert("error in create Person");
+        console.log("error in create Person");
     });
   },
 
@@ -229,7 +229,7 @@ var FrontPage = React.createClass({
       that.trainPersonGroup();
     })
     .fail(function() {
-        alert("error in add person face");
+        console.log("error in add person face");
     });
   },
 
@@ -245,7 +245,7 @@ var FrontPage = React.createClass({
       console.log("training");
     })
     .fail(function() {
-        alert("error in train person group");
+        console.log("error in train person group");
     });
   },
 
@@ -273,7 +273,7 @@ var FrontPage = React.createClass({
       that.blobData = blobData;
     })
     .fail(function() {
-        alert("error in identify person");
+        console.log("error in identify person");
     });
   },
 
@@ -292,7 +292,7 @@ var FrontPage = React.createClass({
       that.setState({ userName: data.name });
     })
     .fail(function() {
-        alert("error get user name");
+        console.log("error get user name");
     });
   } ,
 
@@ -317,7 +317,7 @@ var FrontPage = React.createClass({
       }
     })
     .fail(function (error) {
-      alert("error in give user session token");
+      console.log("error in give user session token");
     });
   },
 
@@ -332,7 +332,7 @@ var FrontPage = React.createClass({
       that.setState({ currentUser: userName });
     })
     .fail(function() {
-      alert('failed to create user');
+      console.log('failed to create user');
     });
   },
 
@@ -411,14 +411,9 @@ var FrontPage = React.createClass({
     }
 
     return (
-<<<<<<< HEAD
-      <div>
-        <div id="video-container">
-=======
       <div className="auth-page">
         <img id="logo" src="assets/moodly-logo.png"/>
         <div id="video-container" style={{ top: top }}>
->>>>>>> 9da2465cc30098daca76953ac2793a0839429f0f
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
