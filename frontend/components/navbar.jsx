@@ -41,10 +41,10 @@ var Navbar = React.createClass({
                                 onClick={this.graphsTab}>Graphs</span> :
                           <span className="navbar-tab graphs"
                                 onClick={this.graphsTab}>Graphs</span>;
-    var text = curr === "message" ?
-                          <span className="navbar-tab message active"
+    var text = curr === "text" ?
+                          <span className="navbar-tab text active"
                                 onClick={this.textTab}>Text Mood</span> :
-                          <span className="navbar-tab message"
+                          <span className="navbar-tab text"
                                 onClick={this.textTab}>Text Mood</span>;
     var twitter = curr === "twitter" ?
                           <span className="navbar-tab twitter active"

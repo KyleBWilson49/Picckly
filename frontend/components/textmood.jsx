@@ -66,7 +66,7 @@ var TextMood = React.createClass({
   // },
 
   render: function(){
-    var left = 500*this.state.moodVal + "px";
+    var left = 780*this.state.moodVal + "px";
     var style = {transform:"translateX(" + left + ")"};
     return (
       <div className="outer-message-div">

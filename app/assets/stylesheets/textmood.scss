@@ -9,7 +9,7 @@
   // top: 100px;
   height: 400px;
   padding: 0px;
-  width: 498px;
+  width: 798px;
   font-size: 24px;
   // margin: auto;
 }
@@ -19,8 +19,12 @@
   position: relative;
   top: 100px;
   height: 100%;
-  width: 500px;
+  width: 800px;
   margin: auto;
+
+  textarea {
+    resize: none;
+  }
 }
 
 .slider-box {
