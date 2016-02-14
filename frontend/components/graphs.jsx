@@ -15,7 +15,6 @@ var Graphs = React.createClass({
   render: function(){
     return (
       <div className="graphs">
-        <Navbar active="graphs"/>
         <div className="top-graphs">
           <PieChart/>
           <BarGraph/>
