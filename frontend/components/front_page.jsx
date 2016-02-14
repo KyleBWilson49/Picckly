@@ -1,6 +1,7 @@
 var React = require('react');
 var Emotion = require('./emotion.jsx');
 var Emotion = require('./emotion');
+var MoodRing = require('./mood_ring.jsx');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
@@ -10,7 +11,8 @@ var FrontPage = React.createClass({
         personId: "",
         blobData: "",
         emotionTest: false,
-        emotionScore: 0
+        emotionScore: 0,
+        currentUser: null
       };
   },
 
@@ -280,7 +282,18 @@ var FrontPage = React.createClass({
   },
 
   giveUserSessionToken: function () {
-    
+    var that = this;
+    $.ajax({
+      url: "/api/sessions",
+      data: { username: this.state.userName },
+      type: "POST"
+    })
+    .done(function (data) {
+      that.setState({ currentUser: this.state.userName });
+    })
+    .fail(function (error) {
+      alert(error);
+    });
   },
 
   createUser: function (userName) {
@@ -291,7 +304,7 @@ var FrontPage = React.createClass({
       type: "POST"
     })
     .done(function(data) {
-      that.history.pushState(null, "/moodring");
+      that.setState({ currentUser: userName });
     })
     .fail(function() {
       alert('failed to create user');
@@ -349,15 +362,28 @@ var FrontPage = React.createClass({
       emotionTest = "";
     }
 
+    var view;
+    if (this.state.currentUser) {
+      view = (
+        <MoodRing />
+      );
+    } else {
+      view = (
+        <div>
+          {switchLoginState}
+          {pageCommands}
+          {emotionTest}
+        </div>
+      );
+    }
+
     return (
       <div>
-        {switchLoginState}
-        {pageCommands}
+        {view}
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
-        {emotionTest}
         <div className="img-holder">
           <img src="" id="photo"/>
         </div>
