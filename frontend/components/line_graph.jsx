@@ -2,8 +2,6 @@
 var React = require('react');
 var EmotionsStore = require('../stores/emotions_store.js');
 
-
-
 var LineGraph = React.createClass({
   getInitialState: function(){
     return {emotion: 'happiness'};
@@ -14,8 +12,9 @@ var LineGraph = React.createClass({
     this.gatherInfo();
   },
 
-  componentWillUnmout: function(){
+  componentWillUnmount: function(){
     this.emotionListener.remove();
+    this.chart.clearChart();
   },
 
   gatherInfo: function(){
@@ -43,9 +42,9 @@ var LineGraph = React.createClass({
     var data = google.visualization.arrayToDataTable(this.dataPoints);
 
 
-    var chart = new google.visualization.LineChart(document.getElementById('line_graph'));
+    this.chart = new google.visualization.LineChart(document.getElementById('line_graph'));
 
-    chart.draw(data);
+    this.chart.draw(data);
   },
 
   changeEmotion: function(e){
