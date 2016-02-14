@@ -42,7 +42,15 @@ ScoresStore.__onDispatch = function (payload) {
     //   removePrimary(payload.primary);
     //   PrimaryStore.__emitChange();
     //   break;
+
+  case "LOGOUTUSER":
+    logOutUser();
+    break;
   }
+};
+
+var logOutUser = function () {
+  ScoresStore.__emitChange();
 };
 
 module.exports = ScoresStore;
