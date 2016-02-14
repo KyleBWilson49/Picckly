@@ -21,4 +21,5 @@
 !secrets.yml
 
 bundle.js
+bundle.js.map
 node_modules
