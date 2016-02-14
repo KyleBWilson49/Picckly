@@ -19,9 +19,9 @@ var Navbar = React.createClass({
     this.history.pushState('', '/graphs');
   },
 
-  messageTab: function(e){
+  textTab: function(e){
     e.preventDefault();
-    this.history.pushState('', '/message');
+    this.history.pushState('', '/textmood');
   },
 
   twitterTab: function(e){
@@ -41,11 +41,11 @@ var Navbar = React.createClass({
                                 onClick={this.graphsTab}>Graphs</span> :
                           <span className="navbar-tab graphs"
                                 onClick={this.graphsTab}>Graphs</span>;
-    var message = curr === "message" ?
+    var text = curr === "message" ?
                           <span className="navbar-tab message active"
-                                onClick={this.messageTab}>Message Mood</span> :
+                                onClick={this.textTab}>Text Mood</span> :
                           <span className="navbar-tab message"
-                                onClick={this.messageTab}>Message Mood</span>;
+                                onClick={this.textTab}>Text Mood</span>;
     var twitter = curr === "twitter" ?
                           <span className="navbar-tab twitter active"
                                 onClick={this.twitterTab}>Twitter</span> :
@@ -57,7 +57,7 @@ var Navbar = React.createClass({
         <div className="navbar-container">
           {moodring}
           {graphs}
-          {message}
+          {text}
           {twitter}
         </div>
       </navbar>

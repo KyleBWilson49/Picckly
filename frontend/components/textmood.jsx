@@ -1,4 +1,5 @@
 var React = require('react');
+var Navbar = require('./navbar');
 // var EmotionsStore = require('../stores/emotions_store');
 // var ApiUtil = require('../util/api_util');
 // var PieChart = require('./pie_chart');
@@ -14,7 +15,8 @@ var TextMood = React.createClass({
     if (e.target.value[e.target.value.length-1] === " ") {
       this.apiCall(e.target.value);
     }
-    this.setState({ inputVal: e.target.value })
+    this.setState({ inputVal: e.target.value });
+    // this.moodValueToText();
   },
   apiCall: function(messageText) {
     var that = this;
@@ -33,14 +35,18 @@ var TextMood = React.createClass({
     .done(function(data) {
         that.setState({ moodVal: data.Score}, function(){
           this.moodValueToText();
-        })
+        });
     })
-    .fail(function() {
-        alert("error");
+    .error(function(request, status, error) {
+      console.log(error + " " + status + ": no text in text box");
     });
   },
+
+  // componentDidUpdate: function(){
+  //   this.moodValueToText();
+  // },
   moodValueToText: function(){
-    console.log(this.state.moodVal)
+    console.log(this.state.moodVal);
     if (this.state.moodVal > .80) {
       this.mood = "Very Positive";
     } else if (this.state.moodVal > .60){
@@ -52,7 +58,6 @@ var TextMood = React.createClass({
     } else {
       this.mood = "Very Negative";
     }
-
   },
 
   // componentDidMount: function(){
@@ -65,17 +70,20 @@ var TextMood = React.createClass({
     var style = {transform:"translateX(" + left + ")"};
     return (
       <div className="outer-message-div">
-        <textarea
-           rows="20"
-           cols="100"
-           className="text-form"
-           onChange={this.handleChange}
-           value={this.state.inputVal}/>
-         <div className="slider-box">
-           <div className="slider-bar"></div>
-           <div className="pointer" style={style}></div>
-           <div className='mood-sentence'>Current message mood: {this.mood}</div>
-         </div>
+        <Navbar active="text"/>
+        <div className="form-and-slider">
+          <textarea
+             rows="20"
+             cols="100"
+             className="text-form"
+             onChange={this.handleChange}
+             value={this.state.inputVal}/>
+           <div className="slider-box">
+             <div className="slider-bar"></div>
+             <div className="pointer" style={style}></div>
+             <div className='mood-sentence'>Current message mood: {this.mood}</div>
+           </div>
+          </div>
       </div>
     );
   }
