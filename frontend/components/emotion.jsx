@@ -5,7 +5,7 @@ var emotions = ["happiness", "sadness", "anger", "surprise"];
 var Emotion = React.createClass({
   getInitialState: function () {
     return{
-      emotionCheck: this.selectEmotion(),
+      emotionCheck: this.randomEmotion(),
       verified: false
     };
   },
@@ -14,12 +14,22 @@ var Emotion = React.createClass({
     this.checkEmotion();
   },
 
+  randomEmotion: function () {
+    return emotions[Math.floor(Math.random() * emotions.length)];
+  },
+
   selectEmotion: function () {
     var selected = false;
     var selectedEmotion;
+<<<<<<< HEAD
     while (selected === false) {
       selectedEmotion = emotions[Math.floor(Math.random() * emotions.length)];
       if (selectedEmotion !== this.state.emotionCheck) {
+=======
+    while (!selected) {
+      selectedEmotion = this.randomEmotion()
+      if (selectedEmotion !== that.state.emotionCheck) {
+>>>>>>> fc3c87d5773dd8d66beceb47025a48be8d370ce1
         selected = true;
       }
     }
