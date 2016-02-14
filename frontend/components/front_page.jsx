@@ -1,16 +1,20 @@
 var React = require('react');
+var Emotion = require('./emotion.jsx');
+var Emotion = require('./emotion');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
       return {
         logIn: "Sign In",
-        userName: ""
+        userName: "",
+        emotionTest: false,
+        emotionScore: 0
       };
   },
 
-  checkEmotion: function() {
+  checkEmotion: function(emotion) {
     var blobData = this.getImage();
-
+    var that = this;
     $.ajax({
       url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
       beforeSend: function(xhrObj){
@@ -20,15 +24,15 @@ var FrontPage = React.createClass({
       type: "POST",
       processData: false,
       data: blobData,
-    })
-    .done(function(data) {
-      console.log(data[0].scores.happiness);
-    })
-    .fail(function() {
-        alert("error");
+      emotion: emotion,
+      success: function (data) {
+        // debugger;
+        var emotion = this.emotion;
+        that.setState({ emotionScore: data[0].scores[emotion] });
+      }
     });
-    return data;
   },
+
 
   dataURItoBlob: function(dataURI) {
     var byteString;
@@ -46,6 +50,10 @@ var FrontPage = React.createClass({
   },
 
   componentDidMount: function () {
+    setTimeout(function () {
+      that.setState({ emotionTest: true });
+    }, 2000);
+
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.webkitGetUserMedia ||
                               navigator.mozGetUserMedia ||
@@ -286,6 +294,17 @@ var FrontPage = React.createClass({
                       <button id="take" onClick={this.signInUser}>Take a photo Sign In</button>
                     </div>;
     }
+    var emotionTest;
+    if (this.state.emotionTest) {
+      emotionTest = (
+        <Emotion username="Kyle"
+          emotionCallback={this.checkEmotion}
+          detectCallback={this.detectPerson}
+          emotionScore={this.state.emotionScore}/>
+      );
+    } else {
+      emotionTest = "";
+    }
 
     return (
       <div>
@@ -295,6 +314,7 @@ var FrontPage = React.createClass({
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
+        {emotionTest}
         <div className="img-holder">
           <img src="" id="photo"/>
         </div>
