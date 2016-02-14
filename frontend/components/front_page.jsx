@@ -7,7 +7,7 @@ var ScoresStore = require('../stores/scores_store.js');
 var FrontPage = React.createClass({
   getInitialState: function () {
       return {
-        logIn: "Sign In",
+        logIn: "Already have an account? Sign In!",
         userName: "",
         personId: "",
         blobData: "",
@@ -332,10 +332,10 @@ var FrontPage = React.createClass({
   },
 
   changePageState: function () {
-    if (this.state.logIn === "Sign In") {
-      this.setState({ logIn: "Sign Up" });
+    if (this.state.logIn === "Already have an account? Sign In!") {
+      this.setState({ logIn: "Need to make an account? Sign Up!" });
     } else {
-      this.setState({ logIn: "Sign In"});
+      this.setState({ logIn: "Already have an account? Sign In!"});
     }
   },
 
@@ -353,20 +353,20 @@ var FrontPage = React.createClass({
   },
 
   render: function () {
-    var switchLoginState = <div onClick={this.changePageState}>{this.state.logIn}</div>;
+    var switchLoginState = <div className="switch-login-state" onClick={this.changePageState}>{this.state.logIn}</div>;
     var pageCommands;
-    if (this.state.logIn === "Sign In") {
-      pageCommands = <div>
+    if (this.state.logIn === "Already have an account? Sign In!") {
+      pageCommands = <div className="page-commands">
                       <input className="userName"
                               onChange={this.inputChange}
                               value={this.state.userName}
                               placeholder="user name"></input>
-                      <br/>
-                      <button id="take" onClick={this.signUpUser}>Take a photo to Sign Up</button>
+
+                      <div id="take" onClick={this.signUpUser}>Take a photo to Sign Up</div>
                     </div>;
     } else {
-      pageCommands = <div>
-                      <button id="take" onClick={this.signInUser}>Take a photo Sign In</button>
+      pageCommands = <div className="page-commands">
+                      <div id="take" onClick={this.signInUser}>Take a photo to Sign In</div>
                     </div>;
     }
     var emotionTest;
@@ -389,24 +389,33 @@ var FrontPage = React.createClass({
       );
     } else {
       view = (
-        <div>
-          {switchLoginState}
-          {pageCommands}
+        <div className="auth-page-info">
           {emotionTest}
+          {pageCommands}
+          {switchLoginState}
         </div>
       );
     }
 
+    var top;
+
+    if (this.props.path === '/') {
+      top = "80";
+    } else {
+      top = "-1000px";
+    }
+
     return (
-      <div>
-        {view}
-        <div id="video-container">
+      <div className="auth-page">
+        <div id="logo">TESTING</div>
+        <div id="video-container" style={{ top: top }}>
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
         <div className="img-holder">
           <img src="" id="photo"/>
         </div>
+        {view}
       </div>
     );
   }

@@ -13,9 +13,10 @@ var MoodRing = require('./components/mood_ring.jsx');
 
 var App = React.createClass({
   render: function () {
+    var path = this.props.location.pathname;
     return (
       <div>
-        <FrontPage/>
+        <FrontPage path={path}/>
         {this.props.children}
       </div>
     );
