@@ -50,9 +50,9 @@ var FrontPage = React.createClass({
   },
 
   componentDidMount: function () {
-    setTimeout(function () {
-      that.setState({ emotionTest: true });
-    }, 2000);
+    // setTimeout(function () {
+    //   that.setState({ emotionTest: true });
+    // }, 2000);
 
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.webkitGetUserMedia ||
