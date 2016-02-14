@@ -4,7 +4,7 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var FrontPage = require('./components/front_page.jsx');
-var PieChart = require('./components/pie_chart.jsx');
+var Graphs = require('./components/graphs.jsx');
 
 var App = React.createClass({
   render: function () {
@@ -17,7 +17,7 @@ var App = React.createClass({
 var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={FrontPage}/>
-    <Route path="/piechart" component={PieChart}/>
+    <Route path="/graphs" component={Graphs}/>
   </Route>
 );
 

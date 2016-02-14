@@ -16,14 +16,16 @@ var PieChart = React.createClass({
     this.gatherInfo();
   },
 
+  componentWillUnmout: function(){
+    this.emotionListener.remove();
+  },
+
   componentWillMount: function(){
     this.emotionListener = EmotionsStore.addListener(this._emotionsChanged);
   },
 
   componentDidMount: function(){
-    google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(this.drawChart);
-    ApiUtil.fetchEmotions();
   },
 
   gatherInfo: function(){
