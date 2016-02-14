@@ -13,29 +13,33 @@
   width: 1000px;
   clear: both;
   float: left;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
+  // border: 1px solid black;
+  // border-left: 1px solid black;
 }
 
 #pie_chart {
   height: 400px;
+  margin: 20px;
   width: 40%;
   float: left;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border: 1px solid black;
+  // border-bottom: 1px solid black;
 }
 
 #bar_graph {
   height: 400px;
-  width: 59%;
+  width: 50%;
   float: left;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  border: 1px solid black;
+  margin: 20px;
+  // border-right: 1px solid black;
 }
 
 .bottom-graph {
   margin: auto;
-  width: 1200px;
+  width: 1162px;
+  border: 1px solid black;
+  display: flex;
 }
 
 #emotion-list {
@@ -50,10 +54,10 @@
     width: 100%;
     cursor: pointer;
     font-size: 24px;
-    height: 9.52%;
+    height: 12.52%;
     display: block;
     border-bottom: 1px solid black;
-    border-right: 1px solid black;
+    // border-right: 1px solid black;
     border-left: 1px solid black;
     margin: 0px;
     text-align: center;
