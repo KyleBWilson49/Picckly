@@ -1,5 +1,5 @@
-require "twitter"
-require "byebug"
+# require "twitter"
+# require "byebug"
 
 client = Twitter::REST::Client.new do |config|
   config.consumer_key        = "yxo0JF3jA2b9wAXw7FlTh7AbL"
