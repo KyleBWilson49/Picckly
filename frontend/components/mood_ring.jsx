@@ -27,14 +27,14 @@ var MoodRing = React.createClass({
 
   moodColor: function () {
     var colors = {
-      "anger": "red",
-      "contempt": "purple",
-      "disgust": "green",
-      "fear": "darkred",
-      "happiness": "yellow",
-      "neutral": "white",
-      "sadness": "blue",
-      "surprise": "orange"
+      "anger": "#cc3838",
+      "contempt": "#b238c9",
+      "disgust": "#66f293",
+      "fear": "#850606",
+      "happiness": "#dcdd50",
+      "neutral": '#444444',
+      "sadness": "#6784ec",
+      "surprise": "#eca02c"
     };
 
     var emotionObj = this.state.currentEmotion;
@@ -53,9 +53,14 @@ var MoodRing = React.createClass({
   },
 
   render: function () {
+    var navbar = document.getElementsByClassName('navbar');
+    if (Boolean(navbar[0])){
+      // debugger;
+      navbar[0].style.backgroundColor = this.moodColor();
+    }
+    // style={{backgroundColor: this.moodColor()}}>
     return (
-      <div className="mood-ring"
-        style={{backgroundColor: this.moodColor()}}>
+      <div className="mood-ring">
         <div className="opacity-wrapper"></div>
         <Navbar active="moodring"/>
       </div>
