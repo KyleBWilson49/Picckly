@@ -124,7 +124,6 @@ var TwitterMood = React.createClass({
     .done(function(data) {
       tweet.score = data.Score;
       that.counter += 1;
-      console.log(that.counter)
       if (that.counter === (tweets.length)) {
         that.forceUpdate();
       }
@@ -139,11 +138,14 @@ var TwitterMood = React.createClass({
     // console.log(this.state.scores)
     return (
       <div className="outer-twitter-div">
-        <input type="text"
-            onChange={this.handleChange}
-            value={this.state.inputVal}/>
-        <div onClick={this.getTweets}>Go</div>
-
+        <div className="outer-handle">
+          <input type="text"
+              className="twitter-handle"
+              onChange={this.handleChange}
+              value={this.state.inputVal}
+              placeholder="Enter Twitter Handle"/>
+            <div type="button" className="go-button" onClick={this.getTweets}>Go</div>
+        </div>
         <TwitterGraph tweets={this.state.tweets}/>
       </div>
     );
