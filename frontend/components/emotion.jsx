@@ -22,9 +22,10 @@ var Emotion = React.createClass({
   selectEmotion: function () {
     var selected = false;
     var selectedEmotion;
+    var that = this;
     while (!selected) {
       selectedEmotion = this.randomEmotion()
-      if (selectedEmotion !== this.state.emotionCheck) {
+      if (selectedEmotion !== that.state.emotionCheck) {
         selected = true;
       }
     }
@@ -45,7 +46,7 @@ var Emotion = React.createClass({
           that.setState({ emotionCheck: that.selectEmotion() });
         }
       }
-    }, 3000);
+    }, 2000);
   },
 
   emotionFace: function () {
