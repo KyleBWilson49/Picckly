@@ -3,7 +3,8 @@ var React = require('react');
 var FrontPage = React.createClass({
   getInitialState: function () {
       return {
-        logIn: true
+        logIn: "Sign In",
+        userName: ""
       };
   },
 
@@ -107,7 +108,7 @@ var FrontPage = React.createClass({
     }
   },
 
-  detectPerson: function () {
+  detectPerson: function (callback, userName) {
     var that = this;
     // grab picture
     var blobData = that.getImage();
@@ -123,7 +124,7 @@ var FrontPage = React.createClass({
       data: blobData,
       success: function (data) {
 
-        that.identifyPerson(data[0].faceId, blobData);
+        callback(data[0].faceId, blobData, userName || '');
         // console.log(data[0].faceId);
         // debugger;
         // var html = '';
@@ -148,7 +149,7 @@ var FrontPage = React.createClass({
     });
   },
 
-  createPerson: function (userName) {
+  createPerson: function (faceId, blobData, userName) {
     var data = JSON.stringify( {
       name: userName
     });
@@ -238,8 +239,8 @@ var FrontPage = React.createClass({
       data: JSON.stringify(dataObj)
     })
     .done(function(data) {
-      var person = data[0].candidates[0].personId;
-      that.addPersonFace(person, blobData);
+      var personId = data[0].candidates[0].personId;
+      that.addPersonFace(personId, blobData);
       console.log(data);
     })
     .fail(function() {
@@ -247,17 +248,49 @@ var FrontPage = React.createClass({
     });
   },
 
-  render: function () {
-    var switchLoginState;
-    if (this.state.logIn) {
-      switchLoginState = <div>Sign Up</div>;
+  changePageState: function () {
+    if (this.state.logIn === "Sign In") {
+      this.setState({ logIn: "Sign Up" });
     } else {
-      switchLoginState = <div>Sign In</div>;
+      this.setState({ logIn: "Sign In"});
     }
+  },
+
+  signUpUser: function () {
+    var userName = this.state.userName;
+    this.detectPerson(this.createPerson, userName);
+  },
+
+  signInUser: function () {
+    this.detectPerson(this.identifyPerson);
+  },
+
+  inputChange: function (e) {
+    this.setState({ userName: e.target.value });
+  },
+
+  render: function () {
+    var switchLoginState = <div onClick={this.changePageState}>{this.state.logIn}</div>;
+    var pageCommands;
+    if (this.state.logIn === "Sign In") {
+      pageCommands = <div>
+                      <input className="userName"
+                              onChange={this.inputChange}
+                              value={this.state.userName}
+                              placeholder="user name"></input>
+                      <br/>
+                      <button id="take" onClick={this.signUpUser}>Take a photo to Sign Up</button>
+                    </div>;
+    } else {
+      pageCommands = <div>
+                      <button id="take" onClick={this.signInUser}>Take a photo Sign In</button>
+                    </div>;
+    }
+
     return (
       <div>
         {switchLoginState}
-        <button id="take">Take a photo</button>
+        {pageCommands}
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
