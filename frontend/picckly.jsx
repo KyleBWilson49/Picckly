@@ -20,8 +20,8 @@ var App = React.createClass({
 var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={FrontPage}/>
-    <Route path="/graphs" component={Graphs}/>
     <Route path="/moodring" component={MoodRing}/>
+    <Route path="/graphs" component={Graphs}/>
     <Route path="/textmood" component={TextMood}/>
     <Route path="/twittermood" component={TwitterMood}/>
   </Route>
