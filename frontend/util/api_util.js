@@ -31,7 +31,8 @@ var ApiUtil = {
       method: "DELETE",
       url: "api/session",
       success: function () {
-        window.currentUserId = '';
+        window.currentUserId = null;
+        ApiActions.logOutUser();
       }
     });
   }

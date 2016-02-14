@@ -89,12 +89,9 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-<<<<<<< HEAD
-    newrelic_rpm (3.14.1.311)
-=======
     multipart-post (2.0.0)
     naught (1.1.0)
->>>>>>> 224da1efdefe7c2f08632fc4b230647708ee7451
+    newrelic_rpm (3.14.1.311)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)

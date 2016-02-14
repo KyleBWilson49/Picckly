@@ -2,6 +2,7 @@ var React = require('react');
 var Emotion = require('./emotion');
 var MoodRing = require('./mood_ring.jsx');
 var ApiUtil = require('../util/api_util');
+var ScoresStore = require('../stores/scores_store.js');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
@@ -14,6 +15,10 @@ var FrontPage = React.createClass({
         emotionScore: 0,
         currentUser: window.currentUserId
       };
+  },
+
+  logOutUser: function () {
+    this.setState({ currentUser: window.currentUserId });
   },
 
   checkEmotion: function(emotion) {
@@ -60,6 +65,7 @@ var FrontPage = React.createClass({
   },
 
   componentDidMount: function () {
+    this.currentUserListener = ScoresStore.addListener(this._onChange);
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.webkitGetUserMedia ||
                               navigator.mozGetUserMedia ||
@@ -119,6 +125,12 @@ var FrontPage = React.createClass({
       }.bind(this), false);
     } else {
       alert('Sorry, your browser does not support getUserMedia');
+    }
+  },
+
+  _onChange: function () {
+    if (!window.currentUser) {
+      this.setState({ currentUser: window.currentUser});
     }
   },
 
