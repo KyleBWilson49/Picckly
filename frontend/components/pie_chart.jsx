@@ -54,15 +54,14 @@ var PieChart = React.createClass({
       title: 'Emotional Percentage'
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
 
     chart.draw(data, options);
   },
 
   render: function(){
-    // debugger;
     return (
-      <div id="piechart"></div>
+      <div id="pie_chart"></div>
     );
   }
 });
