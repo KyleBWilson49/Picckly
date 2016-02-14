@@ -1,12 +1,15 @@
 var React = require('react');
+
 var FrontPage = React.createClass({
+  getInitialState: function () {
+      return {
+        logIn: true
+      };
+  },
+
   checkEmotion: function() {
-    var canvas = document.getElementById('canvas');
-    canvas.width = this.vid.videoWidth;
-    canvas.height = this.vid.videoHeight;
-    canvas.getContext('2d').drawImage(this.vid, 0, 0);
-    var data = canvas.toDataURL('image/jpg');
-    var blobData = this.dataURItoBlob(data);
+    var blobData = this.getImage();
+
     $.ajax({
       url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
       beforeSend: function(xhrObj){
@@ -25,6 +28,7 @@ var FrontPage = React.createClass({
     });
     return data;
   },
+
   dataURItoBlob: function(dataURI) {
     var byteString;
     if (dataURI.split(',')[0].indexOf('base64') >= 0)
@@ -39,6 +43,7 @@ var FrontPage = React.createClass({
     }
     return new Blob([ia], {type:mimeString});
   },
+
   componentDidMount: function () {
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.webkitGetUserMedia ||
@@ -101,15 +106,12 @@ var FrontPage = React.createClass({
       alert('Sorry, your browser does not support getUserMedia');
     }
   },
+
   detectPerson: function () {
     var that = this;
     // grab picture
-    var canvas = document.getElementById('canvas');
-    canvas.width = this.vid.videoWidth;
-    canvas.height = this.vid.videoHeight;
-    canvas.getContext('2d').drawImage(this.vid, 0, 0);
-    var data = canvas.toDataURL('image/jpg');
-    var blobData = this.dataURItoBlob(data);
+    var blobData = that.getImage();
+
     $.ajax({
       url: 'https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false',
       beforeSend: function(xhrObj){
@@ -121,7 +123,7 @@ var FrontPage = React.createClass({
       data: blobData,
       success: function (data) {
 
-        that.identifyPerson(data[0].faceId);
+        that.identifyPerson(data[0].faceId, blobData);
         // console.log(data[0].faceId);
         // debugger;
         // var html = '';
@@ -145,7 +147,12 @@ var FrontPage = React.createClass({
       }
     });
   },
+
   createPerson: function (userName) {
+    var data = JSON.stringify( {
+      name: userName
+    });
+
     var that = this;
     // create person
     $.ajax({
@@ -155,25 +162,29 @@ var FrontPage = React.createClass({
           xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","f79747ed06a7400f8e1053a00639d44a");
       },
       type: "POST",
-      data: "{ name:'Person1' }"
+      data: data
     })
     .done(function(data) {
       console.log(data);
-      that.addPersonFace(data.personId);
+      that.addPersonFace(data.personId, blobData);
     })
     .fail(function() {
         alert("error");
     });
   },
-  addPersonFace: function (personId) {
-    var that = this;
-    // grab picture
+
+  getImage: function () {
     var canvas = document.getElementById('canvas');
     canvas.width = this.vid.videoWidth;
     canvas.height = this.vid.videoHeight;
     canvas.getContext('2d').drawImage(this.vid, 0, 0);
     var data = canvas.toDataURL('image/jpg');
     var blobData = this.dataURItoBlob(data);
+    return blobData;
+  },
+
+  addPersonFace: function (personId, blobData) {
+    var that = this;
     $.ajax({
       url: "https://api.projectoxford.ai/face/v1.0/persongroups/piccklydevweek/persons/" + personId + "/persistedFaces",
       beforeSend: function(xhrObj){
@@ -192,6 +203,7 @@ var FrontPage = React.createClass({
         alert("error");
     });
   },
+
   trainPersonGroup: function () {
     $.ajax({
       url: "https://api.projectoxford.ai/face/v1.0/persongroups/piccklydevweek/train",
@@ -207,14 +219,15 @@ var FrontPage = React.createClass({
         alert("error");
     });
   },
-  identifyPerson: function (faceId) {
+
+  identifyPerson: function (faceId, blobData) {
+    var that = this;
     var dataObj = {
         "personGroupId":"piccklydevweek",
         "faceIds":[faceId],
         "maxNumOfCandidatesReturned":1
       };
-      console.log(faceId);
-      console.log(dataObj);
+
     $.ajax({
       url: "https://api.projectoxford.ai/face/v1.0/identify",
       beforeSend: function(xhrObj){
@@ -225,15 +238,25 @@ var FrontPage = React.createClass({
       data: JSON.stringify(dataObj)
     })
     .done(function(data) {
+      var person = data[0].candidates[0].personId;
+      that.addPersonFace(person, blobData);
       console.log(data);
     })
     .fail(function() {
         alert("error");
     });
   },
+
   render: function () {
+    var switchLoginState;
+    if (this.state.logIn) {
+      switchLoginState = <div>Sign Up</div>;
+    } else {
+      switchLoginState = <div>Sign In</div>;
+    }
     return (
       <div>
+        {switchLoginState}
         <button id="take">Take a photo</button>
         <div id="video-container">
           <video id="camera-stream" width="500" autoPlay></video>
