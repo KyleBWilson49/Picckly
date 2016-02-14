@@ -412,27 +412,16 @@ var FrontPage = React.createClass({
     }
 
     return (
-      <div>
-        <div id="video-container">
-          <div className="auth-page">
-            <img id="logo" src="assets/moodly-logo.png"/>
-            <div id="video-container" style={{ top: top }}>
-              <video id="camera-stream" width="500" autoPlay></video>
-              <canvas id="canvas" style={{display: "none"}}></canvas>
-            </div>
-            <div className="img-holder">
-              <img src="" id="photo"/>
-            </div>
-            {view}
-          </div>
-          <div className="auth-page">
-            <img id="logo" src="assets/moodly-logo.png"/>
-            <div id="video-container" style={{ top: top }}>
-              <video id="camera-stream" width="500" autoPlay></video>
-              <canvas id="canvas" style={{display: "none"}}></canvas>
-            </div>
-          </div>
+      <div className="auth-page">
+        <img id="logo" src="assets/moodly-logo.png"/>
+        <div id="video-container" style={{ top: top }}>
+          <video id="camera-stream" width="500" autoPlay></video>
+          <canvas id="canvas" style={{display: "none"}}></canvas>
         </div>
+        <div className="img-holder">
+          <img src="" id="photo"/>
+        </div>
+        {view}
       </div>
     );
   }

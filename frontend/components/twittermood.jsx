@@ -1,10 +1,10 @@
 var React = require('react');
 // var EmotionsStore = require('../stores/emotions_store');
 var ApiUtil = require('../util/api_util');
-var ApiActions = require('../actions/api_actions')
-var TweetStore = require('../stores/tweets_store')
-var ScoresStore = require('../stores/scores_store')
-var TwitterGraph = require('./twitter_graph')
+var ApiActions = require('../actions/api_actions');
+var TweetStore = require('../stores/tweets_store');
+var ScoresStore = require('../stores/scores_store');
+var TwitterGraph = require('./twitter_graph');
 
 // var PieChart = require('./pie_chart');
 // var LineGraph = require('./line_graph');
@@ -19,14 +19,14 @@ var TwitterMood = React.createClass({
     var that = this;
     this.setState({tweets: TweetStore.all()}, function(){
       that.populateScores();
-    })
+    });
 
   },
   scoresChange: function() {
     var that = this;
     this.setState({scores: ScoresStore.all()}, function(){
       that.forceUpdate();
-    })
+    });
     // console.log(this.state.scores)
   },
 
@@ -34,7 +34,7 @@ var TwitterMood = React.createClass({
     // if (e.target.value[e.target.value.length-1] === " ") {
     //   this.apiCall(e.target.value);
     // }
-    this.setState({ inputVal: e.target.value })
+    this.setState({ inputVal: e.target.value });
   },
   populateScores: function() {
     var map = [];
@@ -69,7 +69,7 @@ var TwitterMood = React.createClass({
         if (typeof tweet !== 'undefined') {
           that.apiCall(tweet.text);
           console.log(tweet.text);
-          return <div>{tweet.text}</div>
+          return <div>{tweet.text}</div>;
         }
       }.bind(this));
 
@@ -91,7 +91,7 @@ var TwitterMood = React.createClass({
         if (typeof score !== 'undefined') {
 
           // console.log(score)
-          return <div>{score}</div>
+          return <div>{score}</div>;
         }
       }.bind(this));
     }
@@ -105,6 +105,7 @@ var TwitterMood = React.createClass({
   },
 
   getTweets: function() {
+    this.counter = 0;
     ApiUtil.fetchTwitter(this.state.inputVal);
   },
   apiCall: function(tweet, idx, tweets) {
