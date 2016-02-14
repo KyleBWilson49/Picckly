@@ -12,13 +12,15 @@ var MoodRing = React.createClass({
   componentDidMount: function () {
     this.EmotionsListener = EmotionsStore.addListener(this._onChange);
     var that = this;
-    setInterval(function () {
+    this.checkEmotionInterval = setInterval(function () {
       that.props.checkEmotion();
     }, 4000);
   },
 
   componentWillUnmout: function () {
+    console.log('unmount');
     this.EmotionsListener.remove();
+    clearInterval(this.checkEmotionInterval);
   },
 
   _onChange: function () {

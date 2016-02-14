@@ -309,7 +309,12 @@ var FrontPage = React.createClass({
       type: "POST"
     })
     .done(function (data) {
-      that.setState({ currentUser: that.state.userName });
+      if (data.errors) {
+        console.log("user validation failed");
+        return;
+      } else {
+        that.setState({ currentUser: that.state.userName });
+      }
     })
     .fail(function (error) {
       alert("error in give user session token");
