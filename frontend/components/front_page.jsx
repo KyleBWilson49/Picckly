@@ -6,6 +6,8 @@ var FrontPage = React.createClass({
       return {
         logIn: "Sign In",
         userName: "",
+        personId: "",
+        blobData: "",
         emotionTest: false,
         emotionScore: 0
       };
@@ -25,7 +27,6 @@ var FrontPage = React.createClass({
       data: blobData,
       emotion: emotion,
       success: function (data) {
-        // debugger;
         var emotion = this.emotion;
         that.setState({ emotionScore: data[0].scores[emotion] });
       }
@@ -170,6 +171,7 @@ var FrontPage = React.createClass({
     })
     .done(function(data) {
       console.log(data);
+      that.createUser(userName);
       that.addPersonFace(data.personId, blobData);
     })
     .fail(function() {
@@ -243,12 +245,45 @@ var FrontPage = React.createClass({
     })
     .done(function(data) {
       var personId = data[0].candidates[0].personId;
-      that.addPersonFace(personId, blobData);
-      console.log(data);
+      var userName = that.getUserName(personId);
+      that.blobData = blobData;
     })
     .fail(function() {
         alert("error");
     });
+  },
+
+  getUserName: function (personId) {
+    var that = this;
+    var userName = '';
+    $.ajax({
+      url: "https://api.projectoxford.ai/face/v1.0/persongroups/piccklydevweek/persons/" + personId,
+      beforeSend: function(xhrObj){
+          xhrObj.setRequestHeader("Content-Type","application/json");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","f79747ed06a7400f8e1053a00639d44a");
+      },
+      type: "GET",
+    })
+    .done(function(data) {
+      userName = data[0].name;
+    })
+    .fail(function() {
+        alert("error");
+    });
+    return userName;
+  } ,
+
+  emotionsVerified: function () {
+    this.addPersonFace(this.state.personId, this.blobData);
+    this.giveUserSessionToken();
+  },
+
+  giveUserSessionToken: function () {
+
+  },
+
+  createUser: function (userName) {
+
   },
 
   changePageState: function () {
@@ -292,10 +327,11 @@ var FrontPage = React.createClass({
     var emotionTest;
     if (this.state.emotionTest) {
       emotionTest = (
-        <Emotion username="Kyle"
+        <Emotion username={this.state.userName}
           emotionCallback={this.checkEmotion}
           detectCallback={this.detectPerson}
-          emotionScore={this.state.emotionScore}/>
+          emotionScore={this.state.emotionScore}
+          emotionsVerified={this.emotionsVerified}/>
       );
     } else {
       emotionTest = "";

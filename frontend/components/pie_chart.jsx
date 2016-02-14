@@ -16,8 +16,9 @@ var PieChart = React.createClass({
     this.gatherInfo();
   },
 
-  componentWillUnmout: function(){
+  componentWillUnmount: function(){
     this.emotionListener.remove();
+    this.chart.clearChart();
   },
 
   componentWillMount: function(){
@@ -25,7 +26,7 @@ var PieChart = React.createClass({
   },
 
   componentDidMount: function(){
-    google.charts.setOnLoadCallback(this.drawChart);
+    this.gatherInfo();
   },
 
   gatherInfo: function(){
@@ -39,6 +40,7 @@ var PieChart = React.createClass({
       this.emotionsHash["sadness"] = emotionSet["sadness"];
       this.emotionsHash["surprise"] = emotionSet["surprise"];
     }.bind(this));
+    google.charts.setOnLoadCallback(this.drawChart);
   },
 
   drawChart: function() {
@@ -54,9 +56,9 @@ var PieChart = React.createClass({
       title: 'Emotional Percentage'
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+    this.chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
 
-    chart.draw(data, options);
+    this.chart.draw(data, options);
   },
 
   render: function(){

@@ -1,5 +1,9 @@
 var React = require('react');
+<<<<<<< HEAD
 var EmotionsStore = require('../stores/emotions_store');
+=======
+var Navbar = require('./navbar');
+>>>>>>> 9d5b15626af69affbf57af2fe9a8d13e9ce02f53
 
 var MoodRing = React.createClass({
   getInitialState: function () {
@@ -51,10 +55,15 @@ var MoodRing = React.createClass({
 
   render: function () {
     return (
+<<<<<<< HEAD
       <div className="mood-ring"
         style={
           backgroundColor: this.moodColor()
         }>
+=======
+      <div>
+        <Navbar active="moodring"/>
+>>>>>>> 9d5b15626af69affbf57af2fe9a8d13e9ce02f53
       </div>
     );
   }

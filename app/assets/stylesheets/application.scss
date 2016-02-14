@@ -35,6 +35,34 @@
    position: relative;
  }
 
+ .navbar {
+   background-color: white;
+   display: block;
+   border-bottom: 1px solid black;
+   font-size: 30px;
+   width: 100%;
+   text-align: center;
+
+   .navbar-container{
+     width: 900px;
+     margin: auto;
+   }
+
+   .navbar-tab {
+     padding: 0px 20px;
+     cursor: pointer;
+     border-left: 1px solid black;
+   }
+
+   .active {
+      border-bottom: 1px solid white;
+   }
+
+   .twitter{
+     border-right: 1px solid black;
+   }
+ }
+
 .emotion-text {
   text-align: center;
 }
