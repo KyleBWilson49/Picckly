@@ -6,6 +6,13 @@ var ApiActions = {
       actionType: "EMOTIONS_RECEIVED",
       emotions: emotions
     });
+  },
+
+  receiveSingleEmotion: function (emotion) {
+    AppDispatcher.dispatch({
+      actionType: "SINGLE_EMOTION_RECEIVED",
+      emotion: emotion
+    });
   }
 };
 

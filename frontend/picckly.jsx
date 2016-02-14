@@ -14,17 +14,18 @@ var MoodRing = require('./components/mood_ring.jsx');
 var App = React.createClass({
   render: function () {
     return (
-      <div>{this.props.children}</div>
+      <div>
+        <FrontPage/>
+        {this.props.children}
+      </div>
     );
   },
 });
 
 var routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={FrontPage}/>
     <Route path="/graphs" component={Graphs}/>
     <Route path="/message" component={Message}/>
-    <Route path="/moodring" component={MoodRing}/>
     <Route path="/graphs" component={Graphs}/>
     <Route path="/textmood" component={TextMood}/>
     <Route path="/twittermood" component={TwitterMood}/>

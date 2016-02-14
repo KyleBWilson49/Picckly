@@ -8,6 +8,12 @@ var ApiUtil = {
       success: ApiActions.receiveEmotions
     });
   },
+
+  postEmotion: function (emotion) {
+    $.post("api/emotions", { emotion: emotion}, function (emotion) {
+      ApiAction
+    })
+  }
 };
 
 module.exports = ApiUtil;

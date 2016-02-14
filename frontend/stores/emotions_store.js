@@ -10,6 +10,9 @@ EmotionsStore.__onDispatch = function(payload){
     case "EMOTIONS_RECEIVED":
       _emotions = payload.emotions;
       break;
+    case "SINGLE_EMOTION_RECEIVED":
+      _emotions.push(payload.emotion);
+      break;
   }
   EmotionsStore.__emitChange();
 };
