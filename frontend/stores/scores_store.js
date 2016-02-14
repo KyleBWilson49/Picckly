@@ -1,8 +1,8 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher/dispatcher');
-var TweetsStore = new Store(AppDispatcher);
+var ScoresStore = new Store(AppDispatcher);
 
-var _tweets = {};
+var _scores = [];
 
 // var resetPrimaries = function (primaries) {
 //   _primaries = {};
@@ -10,25 +10,29 @@ var _tweets = {};
 //     _primaries[primary.id] = primary;
 //   });
 // };
-var createTweets = function (tweets) {
-  _tweets = tweets;
+var createScores = function (scores) {
+  // debugger;
+  _scores.push(scores.Score);
+  if (_scores.length === 20) {
+    ScoresStore.__emitChange();
+  }
 };
 // var removePrimary = function(primary) {
 //   delete _primaries[primary.id];
 // };
-TweetsStore.all = function () {
-  var tweets = [];
-  // debugger;
-  for (var id in _tweets) {
-    tweets.push(_tweets[id]);
-  }
-  return tweets;
+ScoresStore.all = function () {
+  // var scores = [];
+  // for (var id in _scores) {
+  //   scores.push(_scores[id]);
+  // }
+  return _scores;
+
 };
-TweetsStore.__onDispatch = function (payload) {
+ScoresStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
-    case "TWEETS_RECEIVED":
-      createTweets(payload.tweets);
-      TweetsStore.__emitChange();
+    case "SCORES_RECEIVED":
+      createScores(payload.scores);
+      // ScoresStore.__emitChange();
       break;
     // case PrimaryConstants.PRIMARY_CREATED:
     //   addPrimary(payload.primary);
@@ -41,4 +45,4 @@ TweetsStore.__onDispatch = function (payload) {
   }
 };
 
-module.exports = TweetsStore;
+module.exports = ScoresStore;

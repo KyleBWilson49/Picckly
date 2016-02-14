@@ -20,6 +20,12 @@ var ApiActions = {
       actionType: "TWEETS_RECEIVED",
       tweets: tweets
     });
+  },
+  receiveScores: function(scores) {
+    AppDispatcher.dispatch({
+      actionType: "SCORES_RECEIVED",
+      scores: scores
+    });
   }
 };
 
