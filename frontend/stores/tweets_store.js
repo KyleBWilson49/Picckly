@@ -11,6 +11,8 @@ var _tweets = {};
 //   });
 // };
 var createTweets = function (tweets) {
+
+  _tweets = {};
   _tweets = tweets;
 };
 // var removePrimary = function(primary) {
