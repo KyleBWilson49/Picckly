@@ -56,6 +56,7 @@ var MoodRing = React.createClass({
     return (
       <div className="mood-ring"
         style={{backgroundColor: this.moodColor()}}>
+        <div className="opacity-wrapper"></div>
         <Navbar active="moodring"/>
       </div>
     );
