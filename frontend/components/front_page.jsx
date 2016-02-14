@@ -1,5 +1,5 @@
 var React = require('react');
-var Emotion = require('emotion.jsx');
+var Emotion = require('./emotion');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
