@@ -4,6 +4,7 @@ var ApiUtil = require('../util/api_util');
 var ApiActions = require('../actions/api_actions')
 var TweetStore = require('../stores/tweets_store')
 var ScoresStore = require('../stores/scores_store')
+var TwitterGraph = require('./twitter_graph')
 
 // var PieChart = require('./pie_chart');
 // var LineGraph = require('./line_graph');
@@ -22,7 +23,10 @@ var TwitterMood = React.createClass({
 
   },
   scoresChange: function() {
-    this.setState({scores: ScoresStore.all()})
+    var that = this;
+    this.setState({scores: ScoresStore.all()}, function(){
+      that.forceUpdate();
+    })
     // console.log(this.state.scores)
   },
 
@@ -35,15 +39,17 @@ var TwitterMood = React.createClass({
   populateScores: function() {
     var map = [];
     var that = this;
+    var lastIdx;
     if (typeof this.state.tweets !== 'undefined') {
-      map = this.state.tweets.forEach(function(tweet){
+      map = this.state.tweets.forEach(function(tweet, idx, tweets){
         if (typeof tweet !== 'undefined') {
-          that.apiCall(tweet.text);
+          that.apiCall(tweet, idx, tweets);
           // console.log('tweet');
         }
       }.bind(this));
 
     }
+
     // debugger;
     // this.setState({scores: ScoresStore.all()})
 
@@ -53,6 +59,7 @@ var TwitterMood = React.createClass({
   componentDidMount: function(){
     this.tweetListener = TweetStore.addListener(this._onTweetChange);
     this.scoreListener = ScoresStore.addListener(this.scoresChange);
+    this.counter = 0;
   },
   tweetMap: function() {
     var map = [];
@@ -61,7 +68,7 @@ var TwitterMood = React.createClass({
       map = this.state.tweets.map(function(tweet){
         if (typeof tweet !== 'undefined') {
           that.apiCall(tweet.text);
-          // console.log('tweet');
+          console.log(tweet.text);
           return <div>{tweet.text}</div>
         }
       }.bind(this));
@@ -100,10 +107,9 @@ var TwitterMood = React.createClass({
   getTweets: function() {
     ApiUtil.fetchTwitter(this.state.inputVal)
   },
-  apiCall: function(messageText) {
+  apiCall: function(tweet, idx, tweets) {
     var that = this;
     var acctkey = window.btoa("AccountKey:eATIdDoYXwTq/ig6ZMB/sAz0lmiP9oL7DzDS6PExI4A");
-    console.log('apiCall');
     $.ajax({
       url: "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentiment?",
       beforeSend: function(xhrObj){
@@ -112,11 +118,17 @@ var TwitterMood = React.createClass({
       },
       type: "GET",
       data: {
-        Text:messageText
+        Text: tweet.text
       }
     })
     .done(function(data) {
-      ApiActions.receiveScores(data);
+      tweet.score = data.Score;
+      that.counter += 1;
+      console.log(that.counter)
+      if (that.counter === (tweets.length)) {
+        that.forceUpdate();
+      }
+      // ApiActions.receiveScores(data);
     })
     .fail(function() {
       alert("error");
@@ -132,7 +144,7 @@ var TwitterMood = React.createClass({
             value={this.state.inputVal}/>
         <div onClick={this.getTweets}>Go</div>
 
-        <div>{this.scoreMap()}</div>
+        <TwitterGraph tweets={this.state.tweets}/>
       </div>
     );
   }

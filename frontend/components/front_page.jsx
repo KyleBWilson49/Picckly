@@ -12,7 +12,7 @@ var FrontPage = React.createClass({
         blobData: "",
         emotionTest: false,
         emotionScore: 0,
-        currentUser: null
+        currentUser: window.currentUserId
       };
   },
 
@@ -307,7 +307,7 @@ var FrontPage = React.createClass({
     var that = this;
     $.ajax({
       url: "/api/users",
-      data: { user: { username: userName, twitter: "" } },
+      data: { user: { username: userName } },
       type: "POST"
     })
     .done(function(data) {
