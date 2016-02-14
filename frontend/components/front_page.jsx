@@ -1,6 +1,12 @@
 var React = require('react');
 
 var FrontPage = React.createClass({
+  getInitialState: function () {
+      return {
+        logIn: true
+      };
+  },
+
   checkEmotion: function() {
     var blobData = this.getImage();
 
@@ -242,6 +248,9 @@ var FrontPage = React.createClass({
   },
 
   render: function () {
+    if (this.state.logIn) {
+
+    }
     return (
       <div>
         <button id="take">Take a photo</button>
