@@ -31,14 +31,14 @@ var PieChart = React.createClass({
 
   gatherInfo: function(){
     this.state.emotions.forEach(function(emotionSet){
-      this.emotionsHash["anger"] = emotionSet["anger"];
-      this.emotionsHash["contempt"] = emotionSet["contempt"];
-      this.emotionsHash["disgust"] = emotionSet["disgust"];
-      this.emotionsHash["fear"] = emotionSet["fear"];
-      this.emotionsHash["happiness"] = emotionSet["happiness"];
-      this.emotionsHash["neutral"] = emotionSet["neutral"];
-      this.emotionsHash["sadness"] = emotionSet["sadness"];
-      this.emotionsHash["surprise"] = emotionSet["surprise"];
+      this.emotionsHash["Anger"] = emotionSet["anger"];
+      this.emotionsHash["Contempt"] = emotionSet["contempt"];
+      this.emotionsHash["Disgust"] = emotionSet["disgust"];
+      this.emotionsHash["Fear"] = emotionSet["fear"];
+      this.emotionsHash["Happiness"] = emotionSet["happiness"];
+      this.emotionsHash["Neutral"] = emotionSet["neutral"];
+      this.emotionsHash["Sadness"] = emotionSet["sadness"];
+      this.emotionsHash["Surprise"] = emotionSet["surprise"];
     }.bind(this));
     google.charts.setOnLoadCallback(this.drawChart);
   },
@@ -53,7 +53,10 @@ var PieChart = React.createClass({
     var data = google.visualization.arrayToDataTable(emotionsArray);
 
     var options = {
-      title: 'Emotional Percentage'
+      title: 'Emotion Totals',
+      chartArea: {height: '80%', width: '90%'},
+      legend: { position: 'none' },
+      background: {color: 'transparent'}
     };
 
     this.chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
