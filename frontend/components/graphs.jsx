@@ -7,28 +7,22 @@ var LineGraph = require('./line_graph');
 var BarGraph = require('./bar_graph');
 var Navbar = require('./navbar');
 
-
-
 var Graphs = React.createClass({
-
   componentDidMount: function(){
-    // google.charts.load('current', {'packages':['corechart']});
     ApiUtil.fetchEmotions();
-  },
-
-  componentWillUnmount: function(){
-    // document.getElementById('pie_chart').remove();
-    // document.getElementById('line_graph').remove();
-    // document.getElementById('bar_graph').remove();
   },
 
   render: function(){
     return (
-      <div>
+      <div className="graphs">
         <Navbar active="graphs"/>
-        <PieChart />
-        <LineGraph />
-        <BarGraph/>
+        <div className="top-graphs">
+          <PieChart/>
+          <BarGraph/>
+        </div>
+        <div className="bottom-graph">
+          <LineGraph/>
+        </div>
       </div>
     );
   }

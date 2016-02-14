@@ -26,7 +26,7 @@ var routes = (
   <Route path="/" component={App}>
     <Route path="/graphs" component={Graphs}/>
     <Route path="/textmood" component={TextMood}/>
-    <Route path="/twittermood" component={TwitterMood}/>
+    <Route path="/twitter" component={TwitterMood}/>
   </Route>
 );
 

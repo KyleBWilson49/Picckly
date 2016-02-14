@@ -49,9 +49,13 @@ var BarGraph = React.createClass({
                          role: "annotation" }, 2]);
 
       var options = {
-        title: "Smile you're on candid camera",
+        title: "Current Mood",
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
+        chartArea: {height: '80%', width: '90%'},
+        animation: {duration: 3500, easing: 'inAndOut', startup: true},
+        annotations: {textStyle: {opacity: 0}, stem: {length: 0}},
+        vAxis: {minValue: '0', maxValue: '1'}
       };
       this.chart = new google.visualization.ColumnChart(document.getElementById("bar_graph"));
       this.chart.draw(view, options);
