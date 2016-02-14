@@ -6,7 +6,7 @@ var React = require('react');
 // var BarGraph = require('./bar_graph');
 
 
-var Message = React.createClass({
+var TextMood = React.createClass({
   getInitialState: function() {
     return { inputVal: "", moodVal: 0.5 };
   },
@@ -31,11 +31,28 @@ var Message = React.createClass({
       }
     })
     .done(function(data) {
-        that.setState({ moodVal: data.Score})
+        that.setState({ moodVal: data.Score}, function(){
+          this.moodValueToText();
+        })
     })
     .fail(function() {
         alert("error");
     });
+  },
+  moodValueToText: function(){
+    console.log(this.state.moodVal)
+    if (this.state.moodVal > .80) {
+      this.mood = "Very Positive";
+    } else if (this.state.moodVal > .60){
+      this.mood = "Positive";
+    } else if (this.state.moodVal > .40) {
+      this.mood = "Neutral";
+    } else if (this.state.moodVal > .20) {
+      this.mood = "Negative";
+    } else {
+      this.mood = "Very Negative";
+    }
+
   },
 
   // componentDidMount: function(){
@@ -44,8 +61,8 @@ var Message = React.createClass({
   // },
 
   render: function(){
-    var percent = 100*this.state.moodVal + "%";
-    var style = {left:percent};
+    var left = 500*this.state.moodVal + "px";
+    var style = {transform:"translateX(" + left + ")"};
     return (
       <div className="outer-message-div">
         <textarea
@@ -57,11 +74,11 @@ var Message = React.createClass({
          <div className="slider-box">
            <div className="slider-bar"></div>
            <div className="pointer" style={style}></div>
-           <div className='mood-sentence'>Current message mood: {100*this.state.moodVal}</div>
+           <div className='mood-sentence'>Current message mood: {this.mood}</div>
          </div>
       </div>
     );
   }
 });
 
-module.exports = Message;
+module.exports = TextMood;
