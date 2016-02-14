@@ -19,8 +19,9 @@ var FrontPage = React.createClass({
   checkEmotion: function(emotion) {
     var blobData = this.getImage();
     var that = this;
+    var emotionExist;
     if (!emotion) {
-      var emotionExist = false;
+      emotionExist = false;
     }
     $.ajax({
       url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
@@ -31,12 +32,11 @@ var FrontPage = React.createClass({
       type: "POST",
       processData: false,
       data: blobData,
-      emotion: emotion,
+      emotion: emotionExist,
       success: function (data) {
-        if (emotion) {
+        if (!emotion) {
           ApiUtil.postEmotion(data[0].scores);
         } else {
-          emotion = this.emotion;
           that.setState({ emotionScore: data[0].scores[emotion] });
         }
       }
@@ -185,7 +185,7 @@ var FrontPage = React.createClass({
       that.addPersonFace(data.personId, blobData);
     })
     .fail(function() {
-        alert("error");
+        alert("error in create Person");
     });
   },
 
@@ -216,7 +216,7 @@ var FrontPage = React.createClass({
       that.trainPersonGroup();
     })
     .fail(function() {
-        alert("error");
+        alert("error in add person face");
     });
   },
 
@@ -232,7 +232,7 @@ var FrontPage = React.createClass({
       console.log("training");
     })
     .fail(function() {
-        alert("error");
+        alert("error in train person group");
     });
   },
 
@@ -260,7 +260,7 @@ var FrontPage = React.createClass({
       that.blobData = blobData;
     })
     .fail(function() {
-        alert("error");
+        alert("error in identify person");
     });
   },
 
@@ -279,7 +279,7 @@ var FrontPage = React.createClass({
       that.setState({ userName: data.name });
     })
     .fail(function() {
-        alert("error");
+        alert("error get user name");
     });
   } ,
 
@@ -291,15 +291,15 @@ var FrontPage = React.createClass({
   giveUserSessionToken: function () {
     var that = this;
     $.ajax({
-      url: "/api/sessions",
+      url: "/api/session",
       data: { username: this.state.userName },
       type: "POST"
     })
     .done(function (data) {
-      that.setState({ currentUser: this.state.userName });
+      that.setState({ currentUser: that.state.userName });
     })
     .fail(function (error) {
-      alert(error);
+      alert("error in give user session token");
     });
   },
 
@@ -372,7 +372,7 @@ var FrontPage = React.createClass({
     var view;
     if (this.state.currentUser) {
       view = (
-        <MoodRing />
+        <MoodRing checkEmotion={this.checkEmotion}/>
       );
     } else {
       view = (

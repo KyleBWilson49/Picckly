@@ -9,7 +9,6 @@ var ApiUtil = {
     });
   },
 
-
   postEmotion: function (emotion) {
     $.post("api/emotions", { emotion: emotion}, function (emotion) {
       ApiActions.receiveSingleEmotion(emotion);

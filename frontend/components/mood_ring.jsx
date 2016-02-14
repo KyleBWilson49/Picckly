@@ -6,7 +6,7 @@ var MoodRing = React.createClass({
   getInitialState: function () {
     return {
       currentEmotion: EmotionsStore.mostRecent()
-    }
+    };
   },
 
   componentDidMount: function () {
@@ -14,7 +14,7 @@ var MoodRing = React.createClass({
     var that = this;
     setInterval(function () {
       that.props.checkEmotion();
-    }, 400)
+    }, 4000);
   },
 
   componentWillUnmout: function () {
@@ -22,7 +22,7 @@ var MoodRing = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ currentEmotion: EmotionsStore.mostRecent() })
+    this.setState({ currentEmotion: EmotionsStore.mostRecent() });
   },
 
   moodColor: function () {
@@ -35,16 +35,18 @@ var MoodRing = React.createClass({
       "neutral": "white",
       "sadness": "blue",
       "surprise": "orange"
-    }
+    };
 
     var emotionObj = this.state.currentEmotion;
     var maxEmotion;
     var maxEmotionValue = 0;
-    for (var emotion in emotionObj) {
-      if(!obj.hasOwnProperty(prop)) continue;
-      if (emotionObj[emotion] > maxEmotionValue) {
-        maxEmotion = emotion;
-        maxEmotionValue = emotionObj[emotion];
+    for (var emotion in colors) {
+      if(!emotionObj.hasOwnProperty(emotion)) continue;
+      if (emotion !== "id") {
+        if (emotionObj[emotion] > maxEmotionValue) {
+          maxEmotion = emotion;
+          maxEmotionValue = emotionObj[emotion];
+        }
       }
     }
     return colors[maxEmotion];
@@ -53,9 +55,7 @@ var MoodRing = React.createClass({
   render: function () {
     return (
       <div className="mood-ring"
-        style={
-          backgroundColor: this.moodColor()
-        }>
+        style={{backgroundColor: this.moodColor()}}>
         <Navbar active="moodring"/>
       </div>
     );

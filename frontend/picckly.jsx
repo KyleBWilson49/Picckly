@@ -24,14 +24,6 @@ var App = React.createClass({
 
 var routes = (
   <Route path="/" component={App}>
-<<<<<<< HEAD
-    <Route path="/message" component={Message}/>
-=======
-    <IndexRoute component={FrontPage}/>
-    <Route path="/moodring" component={MoodRing}/>
-    <Route path="/graphs" component={Graphs}/>
-    <Route path="/moodring" component={MoodRing}/>
->>>>>>> 83090d6e72feaae1e17f832a292652aefbf4957b
     <Route path="/graphs" component={Graphs}/>
     <Route path="/textmood" component={TextMood}/>
     <Route path="/twittermood" component={TwitterMood}/>
