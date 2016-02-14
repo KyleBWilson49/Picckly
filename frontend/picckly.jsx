@@ -24,7 +24,6 @@ var App = React.createClass({
 
 var routes = (
   <Route path="/" component={App}>
-    <Route path="/graphs" component={Graphs}/>
     <Route path="/message" component={Message}/>
     <Route path="/graphs" component={Graphs}/>
     <Route path="/textmood" component={TextMood}/>
