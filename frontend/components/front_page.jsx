@@ -246,7 +246,8 @@ var FrontPage = React.createClass({
     })
     .done(function(data) {
       var personId = data[0].candidates[0].personId;
-      var userName = that.getUserName(personId);
+      that.setState({ emotionTest: true, personId: personId });
+      that.getUserName(personId);
       that.blobData = blobData;
     })
     .fail(function() {
@@ -266,12 +267,11 @@ var FrontPage = React.createClass({
       type: "GET",
     })
     .done(function(data) {
-      userName = data[0].name;
+      that.setState({ userName: data.name });
     })
     .fail(function() {
         alert("error");
     });
-    return userName;
   } ,
 
   emotionsVerified: function () {
