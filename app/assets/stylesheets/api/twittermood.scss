@@ -10,7 +10,11 @@
   /* margin: auto; */
   display: block;
   border-radius: 16px;
+}
 
+.outer-twitter-div {
+  position: relative;
+  top: 50px;
 }
 
 .outer-handle{
@@ -32,10 +36,10 @@
 }
 
 .go-button{
-  background: green;
+  background: #22a184;
   height: 40px;
   text-align: center;
-  width: 40px;
+  width: 50px;
   float: left;
   padding: 2px;
 }
