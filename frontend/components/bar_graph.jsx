@@ -27,14 +27,14 @@ var BarGraph = React.createClass({
 
   gatherInfo: function(){
     this.dataPoints = [['Emotion', 'Level', {role: 'style'}]];
-    this.dataPoints.push(['Anger', this.state.emotionSet['anger'], 'red']);
-    this.dataPoints.push(['Contempt', this.state.emotionSet['contempt'], 'orange']);
-    this.dataPoints.push(['Disgust', this.state.emotionSet['disgust'], 'pink']);
-    this.dataPoints.push(['Fear', this.state.emotionSet['fear'], 'green']);
-    this.dataPoints.push(['Happiness', this.state.emotionSet['happiness'], 'yellow']);
-    this.dataPoints.push(['Neutral', this.state.emotionSet['neutral'], 'purple']);
-    this.dataPoints.push(['Sadness', this.state.emotionSet['sadness'], 'blue']);
-    this.dataPoints.push(['Surprise', this.state.emotionSet['surprise'], 'black']);
+    this.dataPoints.push(['Anger', this.state.emotionSet['anger'], '#cc3838']);
+    this.dataPoints.push(['Contempt', this.state.emotionSet['contempt'], '#b238c9']);
+    this.dataPoints.push(['Disgust', this.state.emotionSet['disgust'], '#66f293']);
+    this.dataPoints.push(['Fear', this.state.emotionSet['fear'], '#850606']);
+    this.dataPoints.push(['Happiness', this.state.emotionSet['happiness'], '#dcdd50']);
+    this.dataPoints.push(['Neutral', this.state.emotionSet['neutral'], '#444444']);
+    this.dataPoints.push(['Sadness', this.state.emotionSet['sadness'], '#6784ec']);
+    this.dataPoints.push(['Surprise', this.state.emotionSet['surprise'], '#eca02c']);
     google.charts.setOnLoadCallback(this.drawChart);
   },
 
