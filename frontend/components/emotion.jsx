@@ -6,7 +6,8 @@ var Emotion = React.createClass({
   getInitialState: function () {
     return{
       emotionCheck: this.randomEmotion(),
-      verified: false
+      verified: false,
+      verifiedEmotions: 0
     };
   },
 
@@ -23,7 +24,7 @@ var Emotion = React.createClass({
     var selectedEmotion;
     while (!selected) {
       selectedEmotion = this.randomEmotion()
-      if (selectedEmotion !== that.state.emotionCheck) {
+      if (selectedEmotion !== this.state.emotionCheck) {
         selected = true;
       }
     }
@@ -34,26 +35,31 @@ var Emotion = React.createClass({
     var that = this;
 
     var interval = setInterval(function () {
-      if (that.props.emotionScore < 0.9) {
-        that.props.emotionCallback(that.state.emotionCheck);
-      } else {
-        clearInterval(interval);
-        console.log("You DID IT!!");
+      that.props.emotionCallback(that.state.emotionCheck);
+      if (that.props.emotionScore > 0.7) {
+        that.setState({ verifiedEmotions: that.state.verifiedEmotions + 1 });
+        if (that.state.verifiedEmotions >= 2) {
+          clearInterval(interval);
+          this.props.emotionsVerified();
+        } else {
+          that.setState({ emotionCheck: that.selectEmotion() });
+        }
       }
-    }, 2000);
+    }, 2500);
   },
 
   emotionFace: function () {
     if (this.state.emotionCheck == "happiness") {
       return ":)";
-    } else {
-      return ">:(";
+    } else if (this.state.emotionCheck == "sadness") {
+      return ":(";
+    } else if (this.state.emotionCheck == "neutral") {
+      return ":|";
     }
   },
 
   render: function () {
     var face = this.emotionFace();
-    console.log(this.props.emotionScore);
     return (
       <div>
         <section className="emotion-text">
