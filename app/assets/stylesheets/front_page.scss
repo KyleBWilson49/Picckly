@@ -9,6 +9,16 @@
   width: 400px;
 }
 
+body {
+  background: url(wallpaper.jpg);
+  height: 100%;
+  margin: 0px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
 .auth-page #video-container {
     position: absolute;
     display: block;
@@ -16,6 +26,13 @@
     margin-right: auto;
     left: 0;
     right: 0;
+}
+
+#logo {
+  margin: 0 auto;
+  position: relative;
+  display: block;
+  bottom: 40px;
 }
 
 .switch-login-state {
