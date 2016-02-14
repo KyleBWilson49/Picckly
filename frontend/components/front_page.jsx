@@ -109,7 +109,6 @@ var FrontPage = React.createClass({
   },
 
   detectPerson: function (callback, userName) {
-    debugger
     var that = this;
     // grab picture
     var blobData = that.getImage();
@@ -262,6 +261,10 @@ var FrontPage = React.createClass({
     this.detectPerson(this.createPerson, userName);
   },
 
+  signInUser: function () {
+    this.detectPerson(this.identifyPerson);
+  },
+
   inputChange: function (e) {
     this.setState({ userName: e.target.value });
   },
@@ -280,7 +283,7 @@ var FrontPage = React.createClass({
                     </div>;
     } else {
       pageCommands = <div>
-                      <button id="take">Take a photo Sign In</button>
+                      <button id="take" onClick={this.signInUser}>Take a photo Sign In</button>
                     </div>;
     }
 
