@@ -45,8 +45,6 @@ var BarGraph = React.createClass({
 
       var options = {
         title: "Smile you're on candid camera",
-        width: 600,
-        height: 400,
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
       };
@@ -58,7 +56,6 @@ var BarGraph = React.createClass({
   render: function(){
     return (
       <div>
-        bar graph
         <div id="bar_graph"></div>
       </div>
     );
