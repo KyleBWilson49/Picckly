@@ -45,7 +45,7 @@ var Emotion = React.createClass({
           that.setState({ emotionCheck: that.selectEmotion() });
         }
       }
-    }, 2500);
+    }, 3000);
   },
 
   emotionFace: function () {
