@@ -2,7 +2,6 @@ var React = require('react');
 var History = require('react-router').History;
 var ApiUtil = require('../util/api_util');
 
-
 var Navbar = React.createClass({
   mixins: [History],
 
@@ -31,11 +30,9 @@ var Navbar = React.createClass({
   },
 
   logoutTab: function (e) {
-
     e.preventDefault();
     ApiUtil.logOut();
-    this.history.pushState(null, '/');
-    console.log('hello');
+    this.history.pushState('', '/');
   },
 
   render: function(){
@@ -50,21 +47,18 @@ var Navbar = React.createClass({
                                 onClick={this.graphsTab}>Graphs</span> :
                           <span className="navbar-tab graphs"
                                 onClick={this.graphsTab}>Graphs</span>;
-    var text = curr === "text" ?
-                          <span className="navbar-tab text active"
+    var text = curr === "message" ?
+                          <span className="navbar-tab message active"
                                 onClick={this.textTab}>Text Mood</span> :
-                          <span className="navbar-tab text"
+                          <span className="navbar-tab message"
                                 onClick={this.textTab}>Text Mood</span>;
     var twitter = curr === "twitter" ?
                           <span className="navbar-tab twitter active"
                                 onClick={this.twitterTab}>Twitter</span> :
                           <span className="navbar-tab twitter"
                                 onClick={this.twitterTab}>Twitter</span>;
-    var logout = curr === "logout" ?
-                          <span className="navbar-tab logout active"
-                                onClick={this.logoutTab}>Log Out</span> :
-                          <span className="navbar-tab logout"
-                                onClick={this.logoutTab}>Log Out</span>;
+    var logout =  <span className="navbar-tab logout"
+                        onClick={this.logoutTab}>Log Out</span>
 
     return(
       <navbar className="navbar">

@@ -1,4 +1,5 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
+var FrontPage = require('../components/front_page');
 
 var ApiActions = {
   receiveEmotions: function(emotions) {
@@ -25,6 +26,12 @@ var ApiActions = {
     AppDispatcher.dispatch({
       actionType: "SCORES_RECEIVED",
       scores: scores
+    });
+  },
+
+  logOutUser: function () {
+    AppDispatcher.dispatch({
+      actionType: "LOGOUTUSER",
     });
   }
 };

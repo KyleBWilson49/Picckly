@@ -94,8 +94,12 @@ GEM
 <<<<<<< HEAD
     newrelic_rpm (3.14.1.311)
 =======
+<<<<<<< HEAD
+    newrelic_rpm (3.14.1.311)
+=======
     newrelic_rpm (3.14.3.313)
 >>>>>>> 6b9340ad72c09ea96777ef965122f8d56c05859d
+>>>>>>> b90e00221a33843fa7f3e34e6fa3fbfba0fb388d
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
