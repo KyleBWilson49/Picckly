@@ -5,6 +5,9 @@ var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var FrontPage = require('./components/front_page.jsx');
 var Graphs = require('./components/graphs.jsx');
+var MoodRing;
+var TextMood;
+var TwitterMood;
 
 var App = React.createClass({
   render: function () {
@@ -18,6 +21,9 @@ var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={FrontPage}/>
     <Route path="/graphs" component={Graphs}/>
+    <Route path="/moodring" component={MoodRing}/>
+    <Route path="/textmood" component={TextMood}/>
+    <Route path="/twittermood" component={TwitterMood}/>
   </Route>
 );
 
