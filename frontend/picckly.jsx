@@ -15,7 +15,7 @@ var App = React.createClass({
   render: function () {
     var path = this.props.location.pathname;
     return (
-      <div>
+      <div className="first">
         <FrontPage path={path}/>
         {this.props.children}
       </div>

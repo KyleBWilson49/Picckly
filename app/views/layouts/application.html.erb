@@ -15,7 +15,10 @@
     google.charts.load('current', {'packages':['corechart']});
   </script>
 </head>
-<body>
+<body id="body">
+  <script type="text/javascript">
+    window.current_tab = 'moodring';
+  </script>
 
 <%= yield %>
 
