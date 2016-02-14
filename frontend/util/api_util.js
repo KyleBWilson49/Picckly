@@ -8,6 +8,16 @@ var ApiUtil = {
       success: ApiActions.receiveEmotions
     });
   },
+  fetchTwitter: function(handle){
+    $.ajax({
+      method: "POST",
+      url: "api/tweets",
+      data: {query: handle},
+      success: function (tweets) {
+        ApiActions.receiveTweets(tweets);
+      }
+    });
+  }
 };
 
 module.exports = ApiUtil;

@@ -6,6 +6,12 @@ var ApiActions = {
       actionType: "EMOTIONS_RECEIVED",
       emotions: emotions
     });
+  },
+  receiveTweets: function(tweets) {
+    AppDispatcher.dispatch({
+      actionType: "TWEETS_RECEIVED",
+      tweets: tweets
+    });
   }
 };
 
