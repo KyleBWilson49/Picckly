@@ -8,12 +8,16 @@ var BarGraph = React.createClass({
   },
 
   componentDidMount: function(){
-    this.emotionsListener = EmotionsStore.addListener(this._emotionsChanged);
-    google.charts.setOnLoadCallback(this.drawChart);
+    this.gatherInfo();
   },
 
-  componentWillUnmout: function(){
+  componentWillMount: function(){
+    this.emotionsListener = EmotionsStore.addListener(this._emotionsChanged);
+  },
+
+  componentWillUnmount: function(){
     this.emotionsListener.remove();
+    this.chart.clearChart();
   },
 
   _emotionsChanged: function(){
@@ -31,6 +35,7 @@ var BarGraph = React.createClass({
     this.dataPoints.push(['Neutral', this.state.emotionSet['neutral'], 'purple']);
     this.dataPoints.push(['Sadness', this.state.emotionSet['sadness'], 'blue']);
     this.dataPoints.push(['Surprise', this.state.emotionSet['surprise'], 'black']);
+    google.charts.setOnLoadCallback(this.drawChart);
   },
 
   drawChart: function(){
@@ -48,8 +53,8 @@ var BarGraph = React.createClass({
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("bar_graph"));
-      chart.draw(view, options);
+      this.chart = new google.visualization.ColumnChart(document.getElementById("bar_graph"));
+      this.chart.draw(view, options);
   },
 
 

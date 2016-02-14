@@ -1,5 +1,5 @@
 var React = require('react');
-var Emotion = require('emotion.jsx');
+var Emotion = require('./emotion.jsx');
 
 var FrontPage = React.createClass({
   getInitialState: function () {
@@ -49,10 +49,6 @@ var FrontPage = React.createClass({
   },
 
   componentDidMount: function () {
-    setTimeout(function () {
-      that.setState({ emotionTest: true });
-    }, 2000);
-
     navigator.getUserMedia = (navigator.getUserMedia ||
                               navigator.webkitGetUserMedia ||
                               navigator.mozGetUserMedia ||

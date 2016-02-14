@@ -1,4 +1,5 @@
 var React = require('react');
+var Navbar = require('./navbar');
 // var EmotionsStore = require('../stores/emotions_store');
 // var ApiUtil = require('../util/api_util');
 // var PieChart = require('./pie_chart');
@@ -12,9 +13,9 @@ var Message = React.createClass({
   },
   handleChange: function(e) {
     if (e.target.value[e.target.value.length-1] === " ") {
-      
+
     }
-    this.setState({ inputVal: e.target.value })
+    this.setState({ inputVal: e.target.value });
   },
 
   // componentDidMount: function(){
@@ -25,6 +26,7 @@ var Message = React.createClass({
   render: function(){
     return (
       <div>
+        <Navbar active="message"/>
         <textarea
            rows="4"
            cols="50"
