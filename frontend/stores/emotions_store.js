@@ -15,7 +15,6 @@ EmotionsStore.__onDispatch = function(payload){
 };
 
 EmotionsStore.allEmotions = function(){
-  console.log("here");
   return _emotions.slice(0);
 };
 
