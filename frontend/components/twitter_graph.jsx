@@ -67,6 +67,20 @@ var TwitterGraph = React.createClass({
     //
     // chart.draw(data, options);
   },
+  tweetsMap: function() {
+    var map = [];
+
+    if (this.props.tweets[0] && this.props.tweets[0].score) {
+      map = this.props.tweets.map(function(tweet){
+        if (typeof tweet !== 'undefined') {
+          return <div className="tweets">{tweet.text}</div>
+        }
+      }.bind(this));
+    }
+
+
+    return map;
+  },
 
 
 
@@ -75,6 +89,7 @@ var TwitterGraph = React.createClass({
       <div>
         <div id='twitter_graph'>
         </div>
+        <div>{this.tweetsMap()}</div>
       </div>
     );
   }

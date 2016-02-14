@@ -46,7 +46,6 @@ var TextMood = React.createClass({
   //   this.moodValueToText();
   // },
   moodValueToText: function(){
-    console.log(this.state.moodVal);
     if (this.state.moodVal > .80) {
       this.mood = "Very Positive";
     } else if (this.state.moodVal > .60){

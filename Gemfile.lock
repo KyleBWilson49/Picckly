@@ -36,7 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.8)
+    addressable (2.4.0)
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -91,7 +91,15 @@ GEM
     multi_json (1.11.2)
     multipart-post (2.0.0)
     naught (1.1.0)
+<<<<<<< HEAD
     newrelic_rpm (3.14.1.311)
+=======
+<<<<<<< HEAD
+    newrelic_rpm (3.14.1.311)
+=======
+    newrelic_rpm (3.14.3.313)
+>>>>>>> 6b9340ad72c09ea96777ef965122f8d56c05859d
+>>>>>>> b90e00221a33843fa7f3e34e6fa3fbfba0fb388d
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
