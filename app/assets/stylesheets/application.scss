@@ -21,6 +21,9 @@
  }
 
  #video-container {
+   position: absolute;
+   top: 10%;
+   left: 30%;
    margin: 2em auto 0;
    width: 555px;
    padding: 2em;
@@ -46,7 +49,8 @@
    text-align: center;
    height: 40px;
 
-   .navbar-container{
+
+   .navbar-container {
      width: 900px;
      margin: auto;
    }
@@ -75,9 +79,20 @@
 }
 
 .mood-ring {
-  // width: 100%;
-  // height: 100%;
-  // // position: absolute;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   transition: all 3s;
   z-index: -1000;
+}
+
+.opacity-wrapper {
+  width: 70%;
+  height: 90%;
+  opacity: 0.9;
+  background-color: white;
+  position: absolute;
+  z-index: -999;
+  left: 15%;
+  right: 15%;
 }
