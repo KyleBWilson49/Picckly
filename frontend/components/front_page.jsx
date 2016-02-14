@@ -400,14 +400,14 @@ var FrontPage = React.createClass({
     var top;
 
     if (this.props.path === '/') {
-      top = "80";
+      top = "100";
     } else {
       top = "-1000px";
     }
 
     return (
       <div className="auth-page">
-        <div id="logo">TESTING</div>
+        <img id="logo" src="assets/moodly-logo.png"/>
         <div id="video-container" style={{ top: top }}>
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
