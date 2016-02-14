@@ -66,7 +66,7 @@ var Emotion = React.createClass({
         <section className="emotion-text">
           Hello {this.props.username}! <br/>
           Make a {this.state.emotionCheck} face {face}<br/>
-          {this.props.emotionScore}
+          {Math.floor(this.props.emotionScore * 100) + "%"}
         </section>
         <section>
 

@@ -39,10 +39,17 @@
   width: 100%;
   background: linear-gradient(to right, red, yellow, #66FF00);
 }
+
+.slider-bar2 {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, white, blue);
+}
+
 .pointer {
   height: 100%;
   width: 20px;
-  transition: all 2s;
+  transition: all 2.5s;
   background: black;
   position: relative;
   bottom: 50px;

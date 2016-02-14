@@ -32,7 +32,7 @@ var FrontPage = React.createClass({
       url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
       beforeSend: function(xhrObj){
           xhrObj.setRequestHeader("Content-Type","application/octet-stream");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","6f76ecd049fc42ffb6bf91d26e37a9aa");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","52903b4321454c64aa827dbd664b5c97");
       },
       type: "POST",
       processData: false,
@@ -388,11 +388,13 @@ var FrontPage = React.createClass({
       emotionTest = "";
     }
 
+    var img;
     var view;
     if (this.state.currentUser) {
       view = (
         <MoodRing checkEmotion={this.checkEmotion}/>
       );
+      img = "";
     } else {
       view = (
         <div className="auth-page-info">
@@ -401,6 +403,7 @@ var FrontPage = React.createClass({
           {switchLoginState}
         </div>
       );
+      img = <img id="logo" src="assets/moodly-logo.png"/>
     }
 
     var top;
@@ -413,7 +416,7 @@ var FrontPage = React.createClass({
 
     return (
       <div className="auth-page">
-        <img id="logo" src="assets/moodly-logo.png"/>
+        {img}
         <div id="video-container" style={{ top: top }}>
           <video id="camera-stream" width="500" autoPlay></video>
           <canvas id="canvas" style={{display: "none"}}></canvas>
