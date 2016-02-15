@@ -13,7 +13,7 @@ var TwitterGraph = require('./twitter_graph');
 
 var TwitterMood = React.createClass({
   getInitialState: function() {
-    return { tweets: [], inputVal: "", scores: []};
+    return { tweets: [], inputVal: "", scores: [], fetching: false };
   },
   _onTweetChange: function() {
     var that = this;
@@ -27,6 +27,7 @@ var TwitterMood = React.createClass({
     this.setState({scores: ScoresStore.all()}, function(){
       that.forceUpdate();
     });
+
     // console.log(this.state.scores)
   },
 
@@ -107,6 +108,7 @@ var TwitterMood = React.createClass({
   getTweets: function() {
     this.counter = 0;
     ApiUtil.fetchTwitter(this.state.inputVal);
+    this.setState({ fetching: true });
   },
   apiCall: function(tweet, idx, tweets) {
     var that = this;
@@ -126,6 +128,7 @@ var TwitterMood = React.createClass({
       tweet.score = data.Score;
       that.counter += 1;
       if (that.counter === (tweets.length)) {
+        that.setState({ fetching: false });
         that.forceUpdate();
       }
       // ApiActions.receiveScores(data);
@@ -135,8 +138,18 @@ var TwitterMood = React.createClass({
     });
   },
 
+  finishFetch: function () {
+    this.setState({ fetching: false });
+  },
+
   render: function(){
     // console.log(this.state.scores)
+    var fetchImg;
+    if (this.state.fetching) {
+      fetchImg = <img style={{ margin: "auto", width: "100px", display: "block", position: "relative", top: "200px" }} src="assets/fetching.gif"/>;
+    } else {
+      fetchImg = "";
+    }
     return (
       <div className="outer-twitter-div">
         <div className="outer-handle">
@@ -147,7 +160,8 @@ var TwitterMood = React.createClass({
               placeholder="Enter Twitter Handle"/>
             <input type="button" className="go-button" onClick={this.getTweets} value='Go'/>
         </div>
-        <TwitterGraph tweets={this.state.tweets}/>
+        {fetchImg}
+        <TwitterGraph tweets={this.state.tweets} fetching={this.state.fetching}/>
       </div>
     );
   }

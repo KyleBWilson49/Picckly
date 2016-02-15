@@ -48,27 +48,12 @@ var TwitterGraph = React.createClass({
     }
     var data = google.visualization.arrayToDataTable(this.dataPoints);
 
-    var chart = new google.visualization.LineChart(document.getElementById('twitter_graph'));
-
-    chart.draw(data);
-    // var data = google.visualization.arrayToDataTable([
-    //   ['Year', 'Sales', 'Expenses'],
-    //   ['2004',  1000,      400],
-    //   ['2005',  1170,      460],
-    //   ['2006',  660,       1120],
-    //   ['2007',  1030,      540]
-    // ]);
-    //
-    // var options = {
-    //   title: 'Company Performance',
-    //   curveType: 'function',
-    //   legend: { position: 'bottom' }
-    // };
-    //
-    // var chart = new google.visualization.LineChart(document.getElementById('twitter_graph'));
-    //
-    // chart.draw(data, options);
+    window.twitterChart = new google.visualization.LineChart(document.getElementById('twitter_graph'));
+    // if (!this.props.fetching) {
+    window.twitterChart.draw(data);
+    // }
   },
+
   tweetsMap: function() {
     var map = [];
 

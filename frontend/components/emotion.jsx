@@ -1,6 +1,6 @@
 var React = require('react');
 
-var emotions = ["happiness", "sadness", "neutral"];
+var emotions = ["happiness", "neutral"];
 
 var Emotion = React.createClass({
   getInitialState: function () {
