@@ -105,7 +105,10 @@ var TwitterMood = React.createClass({
 
   },
 
-  getTweets: function() {
+  getTweets: function(e) {
+    e.preventDefault();
+    debugger;
+    document.getElementById('twitter_graph').innerHTML = "";
     this.counter = 0;
     ApiUtil.fetchTwitter(this.state.inputVal);
     this.setState({ fetching: true });
@@ -153,12 +156,14 @@ var TwitterMood = React.createClass({
     return (
       <div className="outer-twitter-div">
         <div className="outer-handle">
-          <input type="text"
+          <form onSubmit={this.getTweets}>
+            <input type="text"
               className="twitter-handle"
               onChange={this.handleChange}
               value={this.state.inputVal}
               placeholder="Enter Twitter Handle"/>
             <input type="button" className="go-button" onClick={this.getTweets} value='Go'/>
+          </form>
         </div>
         {fetchImg}
         <TwitterGraph tweets={this.state.tweets} fetching={this.state.fetching}/>
