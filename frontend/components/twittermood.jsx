@@ -113,7 +113,7 @@ var TwitterMood = React.createClass({
   },
   apiCall: function(tweet, idx, tweets) {
     var that = this;
-    var acctkey = window.btoa("AccountKey:eATIdDoYXwTq/ig6ZMB/sAz0lmiP9oL7DzDS6PExI4A");
+    var acctkey = window.btoa("AccountKey:4f1GhUsQdbVX1uVAmFzcKR3HsQk/8T74ZmwSYDycMNc");
     $.ajax({
       url: "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentiment?",
       beforeSend: function(xhrObj){
