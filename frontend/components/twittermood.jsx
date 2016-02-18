@@ -107,8 +107,6 @@ var TwitterMood = React.createClass({
 
   getTweets: function(e) {
     e.preventDefault();
-    debugger;
-    document.getElementById('twitter_graph').innerHTML = "";
     this.counter = 0;
     ApiUtil.fetchTwitter(this.state.inputVal);
     this.setState({ fetching: true });
@@ -147,10 +145,15 @@ var TwitterMood = React.createClass({
 
   render: function(){
     // console.log(this.state.scores)
+    var graph = document.getElementById('twitter_graph');
     var fetchImg;
     if (this.state.fetching) {
+      graph.style.visibility='hidden';
       fetchImg = <img style={{ margin: "auto", width: "100px", display: "block", position: "relative", top: "200px" }} src="assets/fetching.gif"/>;
     } else {
+      if (graph){
+        graph.style.visibility='visible';
+      }
       fetchImg = "";
     }
     return (

@@ -60,7 +60,7 @@ var TwitterGraph = React.createClass({
     if (this.props.tweets[0] && this.props.tweets[0].score) {
       map = this.props.tweets.map(function(tweet){
         if (typeof tweet !== 'undefined') {
-          return <div style={{background:"rgba(" + Math.floor(250*(1-tweet.score)) + "," + Math.floor(250*tweet.score) + ",0,0.8)"}} className="tweets">{tweet.text}</div>
+          return <div style={{background:"rgba(" + Math.floor(250*(1-tweet.score)) + "," + Math.floor(250*tweet.score) + ",0,0.8)"}} className="tweets">{tweet.text}</div>;
         }
       }.bind(this));
     }
