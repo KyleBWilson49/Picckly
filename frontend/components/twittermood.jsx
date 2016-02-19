@@ -105,14 +105,15 @@ var TwitterMood = React.createClass({
 
   },
 
-  getTweets: function() {
+  getTweets: function(e) {
+    e.preventDefault();
     this.counter = 0;
     ApiUtil.fetchTwitter(this.state.inputVal);
     this.setState({ fetching: true });
   },
   apiCall: function(tweet, idx, tweets) {
     var that = this;
-    var acctkey = window.btoa("AccountKey:eATIdDoYXwTq/ig6ZMB/sAz0lmiP9oL7DzDS6PExI4A");
+    var acctkey = window.btoa("AccountKey:4f1GhUsQdbVX1uVAmFzcKR3HsQk/8T74ZmwSYDycMNc");
     $.ajax({
       url: "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentiment?",
       beforeSend: function(xhrObj){
@@ -144,21 +145,28 @@ var TwitterMood = React.createClass({
 
   render: function(){
     // console.log(this.state.scores)
+    var graph = document.getElementById('twitter_graph');
     var fetchImg;
     if (this.state.fetching) {
+      graph.style.visibility='hidden';
       fetchImg = <img style={{ margin: "auto", width: "100px", display: "block", position: "relative", top: "200px" }} src="assets/fetching.gif"/>;
     } else {
+      if (graph){
+        graph.style.visibility='visible';
+      }
       fetchImg = "";
     }
     return (
       <div className="outer-twitter-div">
         <div className="outer-handle">
-          <input type="text"
+          <form onSubmit={this.getTweets}>
+            <input type="text"
               className="twitter-handle"
               onChange={this.handleChange}
               value={this.state.inputVal}
               placeholder="Enter Twitter Handle"/>
             <input type="button" className="go-button" onClick={this.getTweets} value='Go'/>
+          </form>
         </div>
         {fetchImg}
         <TwitterGraph tweets={this.state.tweets} fetching={this.state.fetching}/>
