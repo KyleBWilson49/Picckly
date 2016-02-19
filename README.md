@@ -14,16 +14,23 @@ Moodly includes 4 main features:
 
 4) Tweet positivity/negativity data using Microsoft's Text Analytics API along with the Twitter API and the Google Charts API. The user inputs a Twitter handle and that handle's previous 20 Tweets are displayed along with a line graph showing their positivity in relation to each other. Each Tweet is also color coded on a positive/negative scale (green/red).
 
-[Demo][http://youtu.be/lQ1fWxBlRsQ]
-
+[Demo][demo]
+[demo]: http://youtu.be/lQ1fWxBlRsQ
 
 # Contributors
 
-[Tommy Holmes][http://tholmes741.github.io/]
-[Huan Ji][http://huanji.me]
-[Ryan Samp][http://www.ryansamp.com]
-[Chris Umbach][http://www.chrisumbach.com]
-[Kyle Wilson][http://kylebwilson.github.io]
+[Tommy Holmes][tommy]
+[Huan Ji][huan]
+[Ryan Samp][ryan]
+[Chris Umbach][chris]
+[Kyle Wilson][kyle]
+
+[tommy]: http://tholmes741.github.io/
+[huan]: http://huanji.me
+[ryan]: http://www.ryansamp.com
+[chris]: http://www.chrisumbach.com
+[kyle]: http://kylebwilson.github.io
+
 
 # References
 http://www.developerweek.com/hackathon/
