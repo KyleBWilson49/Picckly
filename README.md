@@ -1,4 +1,4 @@
-* Moodly
+# Moodly
 
 Submission for the 2016 Developer Week Hackathon - February 13-14, 2016
 
@@ -17,7 +17,7 @@ Moodly includes 4 main features:
 [Demo][http://youtu.be/lQ1fWxBlRsQ]
 
 
-* Contributors
+# Contributors
 
 [Tommy Holmes][http://tholmes741.github.io/]
 [Huan Ji][http://huanji.me]
@@ -25,7 +25,7 @@ Moodly includes 4 main features:
 [Chris Umbach][http://www.chrisumbach.com]
 [Kyle Wilson][http://kylebwilson.github.io]
 
-* References
+# References
 http://www.developerweek.com/hackathon/
 http://accelerate.im/challenges/66
 https://www.projectoxford.ai/face
