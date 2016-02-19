@@ -19,11 +19,11 @@ Moodly includes 4 main features:
 
 # Contributors
 
-[Tommy Holmes][tommy]
-[Huan Ji][huan]
-[Ryan Samp][ryan]
-[Chris Umbach][chris]
-[Kyle Wilson][kyle]
+* [Tommy Holmes][tommy]
+* [Huan Ji][huan]
+* [Ryan Samp][ryan]
+* [Chris Umbach][chris]
+* [Kyle Wilson][kyle]
 
 [tommy]: http://tholmes741.github.io/
 [huan]: http://huanji.me
@@ -33,10 +33,10 @@ Moodly includes 4 main features:
 
 
 # References
-http://www.developerweek.com/hackathon/
-http://accelerate.im/challenges/66
-https://www.projectoxford.ai/face
-https://www.projectoxford.ai/emotion
-https://developers.google.com/chart/
-https://datamarket.azure.com/dataset/amla/text-analytics
-https://dev.twitter.com/products/web
+* http://www.developerweek.com/hackathon/
+* http://accelerate.im/challenges/66
+* https://www.projectoxford.ai/face
+* https://www.projectoxford.ai/emotion
+* https://developers.google.com/chart/
+* https://datamarket.azure.com/dataset/amla/text-analytics
+* https://dev.twitter.com/products/web
