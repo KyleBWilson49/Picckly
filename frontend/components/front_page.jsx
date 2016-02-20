@@ -409,7 +409,7 @@ var FrontPage = React.createClass({
     var top;
 
     if (this.props.path === '/') {
-      top = "100";
+      top = "50";
     } else {
       top = "-1000px";
     }
