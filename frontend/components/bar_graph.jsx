@@ -53,7 +53,7 @@ var BarGraph = React.createClass({
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
         chartArea: {height: '80%', width: '90%'},
-        animation: {duration: 3500, easing: 'inAndOut', startup: true},
+        animation: {duration: 3500, easing: 'inAndOut'},
         annotations: {textStyle: {opacity: 0}, stem: {length: 0}},
         vAxis: {minValue: '0', maxValue: '1'}
       };
